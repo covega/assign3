@@ -24,10 +24,13 @@ svg.append("image")
           .attr("height", height)
           .attr("xlink:href", "sf-map.svg");
 
+var info = d3.select("body").append("div")
+    .attr("id", "info");
 //END MAP SETUP
 
 //BEGIN DATA IMPORT
 
+var displayData = {};
 var data = {};
 
 var svg = svg.append('g')
@@ -37,25 +40,49 @@ var visualize = function(scpd_incidents){
 			.data(scpd_incidents.data)
 		.enter().append("circle")
 			.attr("class", "mark")
-			.attr("r", 1)
+			.attr("r", 2)			
   			.attr("transform", function(d) {
-  				//console.log(d.Location);
-  				//console.log(projection([d.Location[0], d.Location[1]]))
 	    		return "translate(" + projection([
 	      			d.Location[0], //longitude
 	      			d.Location[1] //latitude
 	    		]) + ")";
-			});
-	//console.log(circle);
+			})
+			.on("mouseover", label)
+			//.on("mouseout", function() {info.html(""); });
+			//TODO: uncomment for mouseout
+}
 
-	//circle.exit().remove();
+var radiusA = 1000;
+var radiusB = 1000;
+
+var label = function(d){
+	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
+}
+
+//test
+var filterRange = function(A, B){
+	var toRemove = [];
+	for(var i = 0; i < display_data.length; i++){
+		if(d3.geo.distance(A, display_data[i]) < radiusA || d3.geo.distance(A, display_data[i]) < radiusB){
+			toRemove.push(i);
+		}
+	}
+	for(var r = 0; r < toRemove.length; r++){
+		display_data.splice(r, 1);
+	}
+}
+
+var update = function(){
+	var circle = svg.selectAll("circle");
+	circle.exit().remove();
 }
 
 d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;
 	console.log(scpd_incidents);
 	data = scpd_incidents;
-	visualize(scpd_incidents);
+	displayData = data;
+	visualize(displayData);
 });
 
 
