@@ -34,7 +34,7 @@ var displayData = {};
 var data = {};
 
 
-
+/*START draggables*/
 var drag = d3.behavior.drag()
 	.on("drag", function(d, i){
 		d.x += d3.event.dx;
@@ -49,16 +49,22 @@ var pointOne = svg.append("circle")
 	.attr("class", '.point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
-	.call(drag)
+	.call(drag);
 
-var svg = svg.append('g')
+var pointTwo = svg.append("circle")
+	.attr("class", '.point')
+	.attr("r", 10)
+	.data([{"x": 0, "y":0}])
+	.call(drag);
+
+/*END draggables*/
+
+var svg = svg.append('g');
 
 
-
-var pointTwo;
-var visualize = function(scpd_incidents){
+var visualize = function(){
 	var marks = svg.selectAll(".mark")
-		.data(scpd_incidents, function(d){ return d.id; });
+		.data(displayData,function(d){ return d.IncidentNumber; });
 	marks.enter().append("circle")
 		.attr("class", "mark")
 		.attr("r", 2)			
@@ -81,26 +87,16 @@ var label = function(d){
 //test
 var filterFromPoint = function(point, radius){
 	var toRemove = [];
+	//this is selecting the right data points
 	for(var i = 0; i < displayData.length; i++){
 		if(d3.geo.distance(point, displayData[i].Location) * 3959 > radius){
 			toRemove.push(i);
-			//console.log(displayData[i]);
 			//console.log(d3.geo.distance(point, displayData[i].Location) *3959888);
 		}	
-	}
+	}	
 
-	for(var r = toRemove.length - 1; r >= 0; r--){
-		displayData.splice(toRemove[r], 1);
-	}
-
-	console.log(toRemove.length);
-	for(var x = 0; x < toRemove.length; x++){
-		for(var y = 0; y < displayData.length; y++){
-			if(data[toRemove[x]] === displayData[y]){
-				//console.log(d3.geo.distance(point, displayData[y].Location) * 3959);
-				console.log('np');
-			}
-		}
+	for(var i = toRemove.length - 1; i >= 0; i--){
+		displayData.splice(toRemove[i], 1);
 	}
 
 	update();
@@ -122,7 +118,7 @@ var filterByAttr = function(attr, val){
 }
 
 var update = function(){
-	var marks = svg.selectAll(".mark").data(displayData);
+	var marks = svg.selectAll(".mark").data(displayData, function(d) { return d.IncidentNumber; });
 	marks.exit().remove();
 }
 
@@ -130,14 +126,18 @@ var update = function(){
 d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
-	//data.splice(10, data.length - 10);
+	data.splice(50, data.length - 50);
+	//COULD THIS BE WRONG?
 	for(var i = 0; i < data.length; i++){
-		data[i].id = '' + i;
-		//console.log(data[i].id);
+		data[i].id = i.toString();		
 	}
-	displayData = data;
-	//console.log(displayData);	
-	visualize(displayData);	
+
+	for(var i =0; i < data.length; i++){
+		console.log(data[i].id);
+	}
+	displayData = data.slice();
+	console.log(displayData);	
+	visualize();	
 
 	var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
 
