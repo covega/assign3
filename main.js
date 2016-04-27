@@ -33,7 +33,6 @@ var info = d3.select("body").append("div")
 var displayData = {};
 var data = {};
 
-
 /*START draggables*/
 var drag = d3.behavior.drag()
 	.on("drag", function(d, i){
@@ -59,26 +58,9 @@ var pointTwo = svg.append("circle")
 
 /*END draggables*/
 
+
 var svg = svg.append('g');
-
-
-var visualize = function(){
-	var marks = svg.selectAll(".mark")
-		.data(displayData,function(d){ return d.IncidentNumber; });
-	marks.enter().append("circle")
-		.attr("class", "mark")
-		.attr("r", 2)			
-			.attr("transform", function(d) {
-    		return "translate(" + projection([
-      			d.Location[0], //longitude
-      			d.Location[1] //latitude
-    		]) + ")";
-		})
-		.on("mouseover", label)
-			//.on("mouseout", function() {info.html(""); });
-			//TODO: uncomment for mouseout
-}
-
+var marks;
 
 var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
@@ -117,28 +99,38 @@ var filterByAttr = function(attr, val){
 	update();	
 }
 
-var update = function(){
-	var marks = svg.selectAll(".mark").data(displayData, function(d) { return d.IncidentNumber; });
+var update = function(){	
+	marks = svg.selectAll(".mark")
+		.data(displayData,function(d){ return d.IncidentNumber; });
+
 	marks.exit().remove();
+
+	marks.enter().append("circle")
+		.attr("class", "mark")
+		.attr("r", 2)			
+			.attr("transform", function(d) {
+    		return "translate(" + projection([
+      			d.Location[0], //longitude
+      			d.Location[1] //latitude
+    		]) + ")";
+		})			
+		.on("mouseover", label)
+		//.on("mouseout", function() {info.html(""); });
+		//TODO: uncomment for mouseout
 }
+
 
 
 d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
+
 	data.splice(50, data.length - 50);
-	//COULD THIS BE WRONG?
-	for(var i = 0; i < data.length; i++){
-		data[i].id = i.toString();		
-	}
 
-	for(var i =0; i < data.length; i++){
-		console.log(data[i].id);
-	}
 	displayData = data.slice();
-	console.log(displayData);	
-	visualize();	
 
+	update();
+	
 	var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
 
 	//filterByAttr('Category', 'NON-CRIMINAL');
