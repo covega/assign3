@@ -1,3 +1,61 @@
+h2 {
+	font: 1.5em Tahoma, sans-serif;
+	color: black;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+h3 {
+	font: 1.0em Tahoma, sans-serif;
+	color: black;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+#page-wrap {
+	background: white;
+	min-width: 780px;
+	max-width: 1260px;
+	margin: 10px auto;
+}
+	
+#header {
+	color: white;
+	font: 2.5em Tahoma, sans-serif;
+	text-align: center;
+	background: gray;
+	padding: 10px 0 10px;
+}
+	
+#main-content {
+	padding-left: 340px;
+	padding-top: 10px;
+}
+	
+#left-sidebar {
+	width: 300px;
+	float: left;
+}
+
+input[type=range] {
+	width:85%; 
+	margin-left: 10px;
+}
+
+.category-dropdown {
+	margin-left: 10px;
+	display: inline-block;
+	border: 1px solid black;
+	font: 0.8em Tahoma, sans-serif;
+  	color: black;
+	height: 100px; 
+	width: 85%; 
+	overflow: auto;
+}
+
+
+
+
 .mark {
 	z-index: 1;
 }
