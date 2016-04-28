@@ -1,5 +1,7 @@
-//BEGIN MAP SETUP
+//CONSTS
+var EARTH_RADIUS_MILES = 3959;
 
+//BEGIN MAP SETUP
 
 // Set up size
 var width = 750,
@@ -24,9 +26,11 @@ svg.append("image")
           .attr("height", height)
           .attr("xlink:href", "sf-map.svg");
 
+
+//END MAP SETUP
+
 var info = d3.select("body").append("div")
     .attr("id", "info");
-//END MAP SETUP
 
 //BEGIN DATA IMPORT
 
@@ -41,17 +45,19 @@ var drag = d3.behavior.drag()
 		d3.select(this).attr("transform", function(d, i){
 			return "translate(" + [ d.x,d.y ] + ")";
 		});
+		var point = projection.invert([d.x, d.y]);
+		filterFromPoint(point, 1);
 		//get function 
 	});
 
 var pointOne = svg.append("circle")
-	.attr("class", '.point')
+	.attr("class", 'point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
 	.call(drag);
 
 var pointTwo = svg.append("circle")
-	.attr("class", '.point')
+	.attr("class", 'point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
 	.call(drag);
@@ -66,35 +72,33 @@ var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
 }
 
+/*on adding/removing data
+
+Users will have queries selected
+We have to add and remove from the entire data set each time
+
+
+*/
+
 //test
 var filterFromPoint = function(point, radius){
-	var toRemove = [];
 	//this is selecting the right data points
-	for(var i = 0; i < displayData.length; i++){
-		if(d3.geo.distance(point, displayData[i].Location) * 3959 > radius){
-			toRemove.push(i);
-			//console.log(d3.geo.distance(point, displayData[i].Location) *3959888);
+	displayData = [];
+	for(var i = 0; i < data.length; i++){
+		if(d3.geo.distance(point, data[i].Location) * EARTH_RADIUS_MILES < radius){
+			displayData.push(data[i]);
 		}	
 	}	
-
-	for(var i = toRemove.length - 1; i >= 0; i--){
-		displayData.splice(toRemove[i], 1);
-	}
 
 	update();
 }
 
 var filterByAttr = function(attr, val){
-	var toRemove = [];
 	for(var i = 0; i < displayData.length; i++){
 		if(displayData[i][attr] == val){
-			toRemove.push(i);
+			displayData.push(data[i])
 		}	
 	}
-
-	for(var r = toRemove.length - 1; r >= 0; r--){		
-		displayData.splice(toRemove[r], 1);
-	}	
 
 	update();	
 }
@@ -103,6 +107,8 @@ var update = function(){
 	marks = svg.selectAll(".mark")
 		.data(displayData,function(d){ return d.IncidentNumber; });
 
+	console.log(marks.exit());
+	console.log(marks.enter());
 	marks.exit().remove();
 
 	marks.enter().append("circle")
@@ -115,8 +121,7 @@ var update = function(){
     		]) + ")";
 		})			
 		.on("mouseover", label)
-		//.on("mouseout", function() {info.html(""); });
-		//TODO: uncomment for mouseout
+		.on("mouseout", function() {info.html(""); });
 }
 
 
@@ -125,12 +130,11 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-	data.splice(50, data.length - 50);
-
+	console.log(data);
 	displayData = data.slice();
 
 	update();
-	
+
 	var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
 
 	//filterByAttr('Category', 'NON-CRIMINAL');

@@ -1,0 +1,8 @@
+.mark {
+	z-index: 1;
+}
+
+.point {
+	fill: #cc9900;
+	z-index: 2;
+}
