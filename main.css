@@ -18,7 +18,7 @@ h3 {
 	max-width: 1260px;
 	margin: 10px auto;
 }
-	
+
 #header {
 	color: white;
 	font: 2.5em Tahoma, sans-serif;
@@ -26,12 +26,12 @@ h3 {
 	background: gray;
 	padding: 10px 0 10px;
 }
-	
+
 #main-content {
 	padding-left: 340px;
 	padding-top: 10px;
 }
-	
+
 #left-sidebar {
 	width: 300px;
 	float: left;
@@ -42,18 +42,30 @@ input[type=range] {
 	margin-left: 10px;
 }
 
-.category-dropdown {
-	margin-left: 10px;
-	display: inline-block;
-	border: 1px solid black;
+
+.multiselect {
+	width: 85%;
 	font: 0.8em Tahoma, sans-serif;
-  	color: black;
-	height: 100px; 
-	width: 85%; 
-	overflow: auto;
+	color: black;
 }
-
-
+.selectBox {
+	position: relative;
+}
+.selectBox select {
+	width: 100%;
+	font: 100% Tahoma, sans-serif;
+	color: black;
+}
+.overSelect {
+	position: absolute;
+	left: 0; right: 0; top: 0; bottom: 0;
+}
+#checkboxes {
+	display: none;
+	border: 1px #dadada solid;
+	height: 200px;
+	overflow-y: scroll;
+}
 
 
 .mark {

@@ -18,165 +18,158 @@
 				<h2>Filter Settings</h2>
 				
 
-				<!-- Radius A -->
-				<h3>Radius Around Location A</h3>
-				<input type="range" min="1" max="20" value="0" step="1" onchange="showValue(this.value)"/>
-				<span id="range">1</span>
-				<script type="text/javascript">
-				function showValue(newValue) {
-					document.getElementById("range").innerHTML=newValue;
-				}
-				</script>
-				<!-- http://webtutsdepot.com/2010/04/24/html-5-slider-input-tutorial/ -->
+				<div>
+					<!-- Radius A -->
+					<h3>Radius Around Location A</h3>
+					<input type="range" min="1" max="20" value="0" step="1" onchange="showValue(this.value)"/>
+					<span id="range">1</span>
+					<script type="text/javascript">
+					function showValue(newValue) {
+						document.getElementById("range").innerHTML=newValue;
+					}
+					</script>
+					<!-- http://webtutsdepot.com/2010/04/24/html-5-slider-input-tutorial/ -->
+				</div>
 
 
-				<!-- Radius B -->
-				<h3>Radius Around Location B</h3>
-				<input type="range" min="1" max="20" value="0" step="1" onchange="showValue(this.value)"/>
-				<span id="range">1</span>
-				<script type="text/javascript">
-				function showValue(newValue) {
-					document.getElementById("range").innerHTML=newValue;
-				}
-				</script>
-				<!-- http://webtutsdepot.com/2010/04/24/html-5-slider-input-tutorial/ -->
-
+				<div>
+					<!-- Radius B -->
+					<h3>Radius Around Location B</h3>
+					<input type="range" min="1" max="20" value="0" step="1" onchange="showValue(this.value)"/>
+					<span id="range">1</span>
+					<script type="text/javascript">
+					function showValue(newValue) {
+						document.getElementById("range").innerHTML=newValue;
+					}
+					</script>
+					<!-- http://webtutsdepot.com/2010/04/24/html-5-slider-input-tutorial/ -->
+				</div>
 
 				<!-- Category -->
 				<h3>Category of Crime</h3>
-				<div class="category-dropdown">
-						<input id="noncriminal" type="checkbox" name="categories[]" value="Non-Criminal"/><label for="noncriminal">Non-Criminal</label>
-						</br>
-						<input id="larceny/theft" type="checkbox" name="categories[]" value="Larceny/Theft"/><label for="larceny/theft">Larceny/Theft</label>
-						</br>
-						<input type="checkbox"/>Drug/Narcotic 
-						</br>
-						<input type="checkbox"/>Vehicle Theft
-						</br>
-						<input type="checkbox"/>Stolen Truck
-						</br>
-						<input type="checkbox"/>Battery
-						</br>
-						<input type="checkbox"/>Burglary
-						</br>
-						<input type="checkbox"/>Other Offenses
-						</br>
-						<input type="checkbox"/>Robbery
-						</br>
-						<input type="checkbox"/>Vandalism
-						</br>
-						<input type="checkbox"/>Probation Violation
-						</br>
-						<input type="checkbox"/>Assault
-						</br>
-						<input type="checkbox"/>Missing Person
-						</br>
-						<input type="checkbox"/>Fraud
-						</br>
-						<input type="checkbox"/>Stolen Property
-						</br>
-						<input type="checkbox"/>Warrants
-						</br>
-						<input type="checkbox"/>Prostitution
-						</br>
-						<input type="checkbox"/>Weapon Laws
-						</br>
-						<input type="checkbox"/>Liquor Laws
-						</br>
-						<input type="checkbox"/>Suspicious OCC
-						</br>
-						<input type="checkbox"/>Secondary Codes
-						</br>
-						<input type="checkbox"/>Sex Offenses - Forcible
-						</br>
-						<input type="checkbox"/>Sex Offenses - Non-Forcible
-						</br>
-						<input type="checkbox"/>Drunkenness
-						</br>
-						<input type="checkbox"/>Trespass
-						</br>
-						<input type="checkbox"/>Arson
-						</br>
-						<input type="checkbox"/>Disorderly Conduct
-						</br>
-						<input type="checkbox"/>Kidnapping
-						</br>
-						<input type="checkbox"/>Run Away
-						</br>
-						<input type="checkbox"/>Loitering
-						</br>
-						<input type="checkbox"/>Embezzlement
-						</br>
-						<input type="checkbox"/>Forgery/Counterfeiting
-						</br>
-						<input type="checkbox"/>Gambling
-						</br>
-						<input type="checkbox"/>Driving Under the Influence
-						</br>
-						<input type="checkbox"/>Battery
-						</br>
-						<input type="checkbox"/>Suicide
-						</br>
-						<input type="checkbox"/>Extortion
-						</br>
-						<input type="checkbox"/>Family Offenses
 
-				<!-- 
-					<ul class="items">
-						<input type="checkbox"/>Non-Criminal
-						<input type="checkbox"/>Larceny/Theft
-						<input type="checkbox"/>Drug/Narcotic 
-						<input type="checkbox"/>Vehicle Theft
-						<input type="checkbox"/>Stolen Truck
-						<input type="checkbox"/>Battery
-						<input type="checkbox"/>Burglary
-						<input type="checkbox"/>Other Offenses
-						<input type="checkbox"/>Robbery
-						<input type="checkbox"/>Vandalism
-						<input type="checkbox"/>Probation Violation
-						<input type="checkbox"/>Assault
-						<input type="checkbox"/>Missing Person
-						<input type="checkbox"/>Fraud
-						<input type="checkbox"/>Stolen Property
-						<input type="checkbox"/>Warrants
-						<input type="checkbox"/>Prostitution
-						<input type="checkbox"/>Weapon Laws
-						<input type="checkbox"/>Liquor Laws
-						<input type="checkbox"/>Suspicious OCC
-						<input type="checkbox"/>Secondary Codes
-						<input type="checkbox"/>Sex Offenses, Forcible
-						<input type="checkbox"/>Sex Offenses, Non-Forcible
-						<input type="checkbox"/>Drunkenness
-						<input type="checkbox"/>Trespass
-						<input type="checkbox"/>Arson
-						<input type="checkbox"/>Disorderly Conduct
-						<input type="checkbox"/>Kidnapping
-						<input type="checkbox"/>Run Away
-						<input type="checkbox"/>Loitering
-						<input type="checkbox"/>Embezzlement
-						<input type="checkbox"/>Forgery/Counterfeiting
-						<input type="checkbox"/>Gambling
-						<input type="checkbox"/>Driving Under the Influence
-						<input type="checkbox"/>Battery
-						<input type="checkbox"/>Suicide
-						<input type="checkbox"/>Extortion
-						<input type="checkbox"/>Family Offenses
-					</ul>
-					 -->
+				<form>
+					<div class="multiselect">
+						<div class="selectBox" onclick="showCheckboxes()">
+							<select>
+								<option>Select Category/Categories</option>
+							</select>
+							<div class="overSelect"></div>
+						</div>
+						<div id="checkboxes">
+							<input id="noncriminal" type="checkbox" value="Non-Criminal"/>Non-Criminal</br>
+							<input id="larceny/theft" type="checkbox" value="Larceny/Theft"/>Larceny/Theft</br>
+							<input type="checkbox"/>Drug/Narcotic </br>
+							<input type="checkbox"/>Vehicle Theft </br>
+							<input type="checkbox"/>Stolen Truck </br>
+							<input type="checkbox"/>Battery </br>
+							<input type="checkbox"/>Burglary </br>
+							<input type="checkbox"/>Other Offenses </br>
+							<input type="checkbox"/>Robbery </br>
+							<input type="checkbox"/>Vandalism </br>
+							<input type="checkbox"/>Probation Violation </br>
+							<input type="checkbox"/>Assault </br>
+							<input type="checkbox"/>Missing Person </br>
+							<input type="checkbox"/>Fraud </br>
+							<input type="checkbox"/>Stolen Property </br>
+							<input type="checkbox"/>Warrants </br>
+							<input type="checkbox"/>Prostitution </br>
+							<input type="checkbox"/>Weapon Laws </br>
+							<input type="checkbox"/>Liquor Laws </br>
+							<input type="checkbox"/>Suspicious OCC </br>
+							<input type="checkbox"/>Secondary Codes </br>
+							<input type="checkbox"/>Sex Offenses - Forcible </br>
+							<input type="checkbox"/>Sex Offenses - Non-Forcible </br>
+							<input type="checkbox"/>Drunkenness </br>
+							<input type="checkbox"/>Trespass </br>
+							<input type="checkbox"/>Arson </br>
+							<input type="checkbox"/>Disorderly Conduct </br>
+							<input type="checkbox"/>Kidnapping </br>
+							<input type="checkbox"/>Run Away </br>
+							<input type="checkbox"/>Loitering </br>
+							<input type="checkbox"/>Embezzlement </br>
+							<input type="checkbox"/>Forgery/Counterfeiting </br>
+							<input type="checkbox"/>Gambling </br>
+							<input type="checkbox"/>Driving Under the Influence </br>
+							<input type="checkbox"/>Battery </br>
+							<input type="checkbox"/>Suicide </br>
+							<input type="checkbox"/>Extortion </br>
+							<input type="checkbox"/>Family Offenses
+
 						<!-- 
-						'NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
-					-->
+							<ul class="items">
+								<input type="checkbox"/>Non-Criminal
+								<input type="checkbox"/>Larceny/Theft
+								<input type="checkbox"/>Drug/Narcotic 
+								<input type="checkbox"/>Vehicle Theft
+								<input type="checkbox"/>Stolen Truck
+								<input type="checkbox"/>Battery
+								<input type="checkbox"/>Burglary
+								<input type="checkbox"/>Other Offenses
+								<input type="checkbox"/>Robbery
+								<input type="checkbox"/>Vandalism
+								<input type="checkbox"/>Probation Violation
+								<input type="checkbox"/>Assault
+								<input type="checkbox"/>Missing Person
+								<input type="checkbox"/>Fraud
+								<input type="checkbox"/>Stolen Property
+								<input type="checkbox"/>Warrants
+								<input type="checkbox"/>Prostitution
+								<input type="checkbox"/>Weapon Laws
+								<input type="checkbox"/>Liquor Laws
+								<input type="checkbox"/>Suspicious OCC
+								<input type="checkbox"/>Secondary Codes
+								<input type="checkbox"/>Sex Offenses, Forcible
+								<input type="checkbox"/>Sex Offenses, Non-Forcible
+								<input type="checkbox"/>Drunkenness
+								<input type="checkbox"/>Trespass
+								<input type="checkbox"/>Arson
+								<input type="checkbox"/>Disorderly Conduct
+								<input type="checkbox"/>Kidnapping
+								<input type="checkbox"/>Run Away
+								<input type="checkbox"/>Loitering
+								<input type="checkbox"/>Embezzlement
+								<input type="checkbox"/>Forgery/Counterfeiting
+								<input type="checkbox"/>Gambling
+								<input type="checkbox"/>Driving Under the Influence
+								<input type="checkbox"/>Battery
+								<input type="checkbox"/>Suicide
+								<input type="checkbox"/>Extortion
+								<input type="checkbox"/>Family Offenses
+							</ul>
+							 -->
+								<!-- 
+								'NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
+							-->
+						</div>
+
+					</div>
+				</form>
+
+				<script>
+				var expanded = false;
+				function showCheckboxes() {
+					var checkboxes = document.getElementById("checkboxes");
+					if (!expanded) {
+						checkboxes.style.display = "block";
+						expanded = true;
+					} else {
+						checkboxes.style.display = "none";
+						expanded = false;
+					}
+				}
+				</script>
+
+
+
+				
+			</div>
+
+			<div id="main-content">
+				<div id="map"> </div>
 			</div>
 
 		</div>
-
-		<div id="main-content">
-
-			<div id="map"> </div>
-
-		</div>
-
-
 	</div>
 
 
