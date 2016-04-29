@@ -38,35 +38,13 @@ h3 {
 }
 
 input[type=range] {
-	width:85%; 
+	width: 250px; 
 	margin-left: 10px;
 }
 
-
-.multiselect {
-	width: 85%;
-	font: 0.8em Tahoma, sans-serif;
-	color: black;
+select {
+	width: 250px;
 }
-.selectBox {
-	position: relative;
-}
-.selectBox select {
-	width: 100%;
-	font: 100% Tahoma, sans-serif;
-	color: black;
-}
-.overSelect {
-	position: absolute;
-	left: 0; right: 0; top: 0; bottom: 0;
-}
-#checkboxes {
-	display: none;
-	border: 1px #dadada solid;
-	height: 200px;
-	overflow-y: scroll;
-}
-
 
 .mark {
 	z-index: 1;
