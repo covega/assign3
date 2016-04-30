@@ -36,40 +36,56 @@ var info = d3.select("body").append("div")
 
 var displayData = {};
 var data = {};
+//user quiers stored here?
+var queries;
 
 /*START draggables*/
 
 
 /*END draggables*/
-
+var pointOneLoc;
+var pointTwoLoc;
 
 var g = svg.append('g');
 var marks;
 
-var drag = d3.behavior.drag()
+var dragOne = d3.behavior.drag()
+	.on("drag", function(d, i){
+		d.x += d3.event.dx;
+		d.y += d3.event.dy;		
+		d3.select(this).attr("transform", function(d, i){
+			return "translate(" + [ d.x,d.y ] + ")";
+		});
+		pointOneLoc = projection.invert([d.x, d.y]);
+		query();
+	});
+
+var dragTwo = d3.behavior.drag()
 	.on("drag", function(d, i){
 		d.x += d3.event.dx;
 		d.y += d3.event.dy;
 		d3.select(this).attr("transform", function(d, i){
 			return "translate(" + [ d.x,d.y ] + ")";
 		});
-		var point = projection.invert([d.x, d.y]);
-		query({});
-		filterFromPoint(point, 1);
+		pointTwoLoc = projection.invert([d.x, d.y]);
+		query();
+		//filterFromPoint(this.point, 1);
 		//get function 
-	});
+	});	
 
 var pointOne = svg.append("circle")
 	.attr("class", 'point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
-	.call(drag);
+	.call(dragOne);
 
 var pointTwo = svg.append("circle")
 	.attr("class", 'point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
-	.call(drag);
+	.call(dragTwo);
+
+var allCircles = d3.select("circle");
 
 var svg = g;
 
@@ -93,6 +109,8 @@ var removeElements = function(toRemove){
 
 //test
 var filterFromPoint = function(point, radius){
+	if(!point) return;
+
 	var toRemove = [];
 	//this is selecting the right data points
 	for(var i = 0; i < displayData.length; i++){
@@ -100,7 +118,6 @@ var filterFromPoint = function(point, radius){
 			toRemove.push(i);
 		}	
 	}
-
 	removeElements(toRemove);
 	
 	update();
@@ -114,7 +131,6 @@ var filterByAttr = function(attr, val){
 			toRemove.push(i);
 		}
 	}	
-
 	removeElements(toRemove);
 
 	update();	
@@ -144,6 +160,8 @@ var query = function(){
 
 	displayData = data.slice();
 
+	filterFromPoint(pointOneLoc, 1);
+	filterFromPoint(pointTwoLoc, 1);
 /*	for(var i = 0; i < queries.length; i++){
 
 	}*/
