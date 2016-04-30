@@ -38,6 +38,14 @@ var displayData = {};
 var data = {};
 
 /*START draggables*/
+
+
+/*END draggables*/
+
+
+var g = svg.append('g');
+var marks;
+
 var drag = d3.behavior.drag()
 	.on("drag", function(d, i){
 		d.x += d3.event.dx;
@@ -46,6 +54,7 @@ var drag = d3.behavior.drag()
 			return "translate(" + [ d.x,d.y ] + ")";
 		});
 		var point = projection.invert([d.x, d.y]);
+		query({});
 		filterFromPoint(point, 1);
 		//get function 
 	});
@@ -62,11 +71,7 @@ var pointTwo = svg.append("circle")
 	.data([{"x": 0, "y":0}])
 	.call(drag);
 
-/*END draggables*/
-
-
-var svg = svg.append('g');
-var marks;
+var svg = g;
 
 var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
@@ -80,25 +85,37 @@ We have to add and remove from the entire data set each time
 
 */
 
+var removeElements = function(toRemove){
+	for(var i = toRemove.length-1; i >=0; i--){
+		displayData.splice(toRemove[i], 1);
+	}	
+}
+
 //test
 var filterFromPoint = function(point, radius){
+	var toRemove = [];
 	//this is selecting the right data points
-	displayData = [];
-	for(var i = 0; i < data.length; i++){
-		if(d3.geo.distance(point, data[i].Location) * EARTH_RADIUS_MILES < radius){
-			displayData.push(data[i]);
+	for(var i = 0; i < displayData.length; i++){
+		if(d3.geo.distance(point, displayData[i].Location) * EARTH_RADIUS_MILES > radius){
+			toRemove.push(i);
 		}	
-	}	
+	}
 
+	removeElements(toRemove);
+	
 	update();
 }
 
 var filterByAttr = function(attr, val){
+	var toRemove = [];
+
 	for(var i = 0; i < displayData.length; i++){
-		if(displayData[i][attr] == val){
-			displayData.push(data[i])
-		}	
-	}
+		if(displayData[attr] !== val){
+			toRemove.push(i);
+		}
+	}	
+
+	removeElements(toRemove);
 
 	update();	
 }
@@ -107,13 +124,11 @@ var update = function(){
 	marks = svg.selectAll(".mark")
 		.data(displayData,function(d){ return d.IncidentNumber; });
 
-	console.log(marks.exit());
-	console.log(marks.enter());
 	marks.exit().remove();
 
 	marks.enter().append("circle")
 		.attr("class", "mark")
-		.attr("r", 2)			
+		.attr("r", 2)	
 			.attr("transform", function(d) {
     		return "translate(" + projection([
       			d.Location[0], //longitude
@@ -124,6 +139,15 @@ var update = function(){
 		.on("mouseout", function() {info.html(""); });
 }
 
+
+var query = function(){
+
+	displayData = data.slice();
+
+/*	for(var i = 0; i < queries.length; i++){
+
+	}*/
+}
 
 
 d3.json('scpd_incidents.json', function(error, scpd_incidents){
