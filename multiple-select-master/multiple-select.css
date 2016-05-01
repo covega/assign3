@@ -6,9 +6,8 @@
     display: inline-block;
     position: relative;
     vertical-align: middle;
-    font: 0.8em Tahoma, sans-serif;
-    color: black;
     margin-left: 10px;
+    font-size: 0.9em;
 }
 
 .ms-choice {
@@ -50,7 +49,7 @@
 }
 
 .ms-choice > span.placeholder {
-    color: #999;
+    color: black;
 }
 
 .ms-choice > div {

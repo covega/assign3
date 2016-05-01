@@ -1,12 +1,17 @@
+body {
+    font-family: Tahoma, sans-serif;
+    font-size: 0.9em;
+}
+
 h2 {
-	font: 1.5em Tahoma, sans-serif;
+	font: 1.6em Tahoma, sans-serif;
 	color: black;
 	margin-bottom: 10px;
 	text-align: center;
 }
 
 h3 {
-	font: 1.0em Tahoma, sans-serif;
+	font: 1.2em Tahoma, sans-serif;
 	color: black;
 	margin-bottom: 5px;
 	text-align: left;
@@ -20,11 +25,10 @@ h3 {
 }
 
 #header {
-	color: white;
-	font: 2.5em Tahoma, sans-serif;
-	text-align: center;
-	background: gray;
-	padding: 10px 0 10px;
+	height:80px;
+	background: #adadad;
+	margin: 0;
+	text-align: center
 }
 
 #main-content {
@@ -34,17 +38,55 @@ h3 {
 
 #left-sidebar {
 	width: 360px;
+	height: 100%;
 	float: left;
 	margin-left: 5px;
 }
 
-input[type=range] {
-	width: 330px; 
+#filter {
+	margin-top: 25px;
+}
+
+.slider {
+	width: 295px;
+	vertical-align: middle;
+	float: left;
 	margin-left: 15px;
+}
+
+.slider-text {
+	padding-left: 325px;
+	vertical-align: middle;
+}
+
+.sliderValue {
+	width: 25px; 
+	text-align: center;
+	font-size: 0.8em;
 }
 
 select {
 	width: 350px;
+}
+
+#todRange {
+	margin-top: 0;
+	margin-left: 15px
+}
+
+input.time {
+    width: 100px;
+    height: 20px;
+    font-size: 0.9em;
+}
+
+input {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3px;
+    border: 1px solid #aaa;
+    vertical-align: middle;
 }
 
 .mark {
@@ -52,6 +94,11 @@ select {
 }
 
 .point {
-	fill: #cc9900;
+	fill: #00bfff;
 	z-index: 2;
+}
+
+.point-text {
+	color: black;
+	font: 1.2em Tahoma, sans-serif;
 }
