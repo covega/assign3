@@ -24,7 +24,8 @@ var svg = d3.select("#map").append("svg")
 svg.append("image")
           .attr("width", width)
           .attr("height", height)
-          .attr("xlink:href", "sf-map.svg");
+          .attr("xlink:href", "sf-map.svg")
+          .call(d3.behavior.zoom().scaleExtent([1, 10]).on("zoom", zoom));
 
 
 //END MAP SETUP
@@ -39,10 +40,6 @@ var data = {};
 //user quiers stored here?
 var queries;
 
-/*START draggables*/
-
-
-/*END draggables*/
 var pointOneLoc;
 var pointTwoLoc;
 
@@ -77,29 +74,20 @@ var pointOne = svg.append("circle")
 	.attr("class", 'point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
-	.call(dragOne);
+	.call(dragOne)
 
 var pointTwo = svg.append("circle")
 	.attr("class", 'point')
 	.attr("r", 10)
 	.data([{"x": 0, "y":0}])
-	.call(dragTwo);
+	.call(dragTwo)
 
-var allCircles = d3.select("circle");
 
 var svg = g;
 
 var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
 }
-
-/*on adding/removing data
-
-Users will have queries selected
-We have to add and remove from the entire data set each time
-
-
-*/
 
 var removeElements = function(toRemove){
 	for(var i = toRemove.length-1; i >=0; i--){
@@ -109,7 +97,7 @@ var removeElements = function(toRemove){
 
 //test
 var filterFromPoint = function(point, radius){
-	if(!point) return;
+	if(!point || !radius) return;
 
 	var toRemove = [];
 	//this is selecting the right data points
@@ -124,6 +112,7 @@ var filterFromPoint = function(point, radius){
 }
 
 var filterByAttr = function(attr, val){
+	if(!attr || !val) return;
 	var toRemove = [];
 
 	for(var i = 0; i < displayData.length; i++){
@@ -134,6 +123,11 @@ var filterByAttr = function(attr, val){
 	removeElements(toRemove);
 
 	update();	
+}
+
+var zoom = function() {
+	console.log('zoom called');
+	 svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
 var update = function(){	
@@ -150,9 +144,12 @@ var update = function(){
       			d.Location[0], //longitude
       			d.Location[1] //latitude
     		]) + ")";
-		})			
+		})	
 		.on("mouseover", label)
 		.on("mouseout", function() {info.html(""); });
+
+	console.log(d3.selectAll('svg'));
+
 }
 
 
