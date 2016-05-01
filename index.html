@@ -52,49 +52,53 @@
 				<div>
 					<h3>Category of Crime</h3>
 					<select multiple="multiple">
-						<option value="1">Non-Criminal</option>
-				        <option value="2">Larceny/Theft</option>
-						<option value="3">Drug/Narcotic</option> 
-						<option value="4">Vehicle Theft</option>
-						<option value="5">Stolen Truck</option>
-						<option value="6">Battery</option>
-						<option value="7">Burglary</option>
-						<option value="8">Other Offenses</option>
-						<option value="9">Robbery</option>
-						<option value="10">Vandalism</option>
-						<option value="11">Probation Violation</option>
-						<option value="12">Assault</option>
-						<option value="13">Missing Person</option>
+						<option value="1">Arson</option>
+						<option value="2">Assault</option>
+						<option value="3">Battery</option>
+						<option value="4">Bribery</option>
+						<option value="5">Burglary</option>
+						<option value="6">Disorderly Conduct</option>
+						<option value="7">Driving Under the Influence</option>
+						<option value="8">Drug/Narcotic</option>
+						<option value="9">Drunkenness</option>
+						<option value="10">Embezzlement</option>
+						<option value="11">Extortion</option>
+						<option value="12">Family Offenses</option>
+						<option value="13">Forgery/Counterfeiting</option>
 						<option value="14">Fraud</option>
-						<option value="15">Stolen Property</option>
-						<option value="16">Warrants</option>
-						<option value="17">Prostitution</option>
-						<option value="18">Weapon Laws</option>
-						<option value="19">Liquor Laws</option>
-						<option value="20">Suspicious OCC</option>
-						<option value="21">Secondary Codes</option>
-						<option value="22">Sex Offenses, Forcible</option>
-						<option value="23">Sex Offenses, Non-Forcible</option>
-						<option value="24">Drunkenness</option>
-						<option value="25">Trespass</option>
-						<option value="26">Arson</option>
-						<option value="27">Disorderly Conduct</option>
-						<option value="28">Kidnapping</option>
-						<option value="29">Run Away</option>
-						<option value="30">Loitering</option>
-						<option value="31">Embezzlement</option>
-						<option value="32">Forgery/Counterfeiting</option>
-						<option value="33">Gambling</option>
-						<option value="34">Driving Under the Influence</option>
-						<option value="35">Battery</option>
-						<option value="36">Suicide</option>
-						<option value="37">Extortion</option>
-						<option value="38">Family Offenses</option>
+						<option value="15">Gambling</option>
+						<option value="16">Kidnapping</option>
+						<option value="17">Larceny/Theft</option>
+						<option value="18">Liquor Laws</option>
+						<option value="19">Loitering</option>
+						<option value="20">Missing Person</option>
+						<option value="21">Non-Criminal</option>
+						<option value="22">Other Offenses</option>
+						<option value="23">Probation Violation</option>
+						<option value="24">Prostitution</option>
+						<option value="25">Robbery</option>
+						<option value="26">Run Away</option>
+						<option value="27">Secondary Codes</option>
+						<option value="28">Sex Offenses, Forcible</option>
+						<option value="29">Sex Offenses, Non-Forcible</option>
+						<option value="30">Stolen Property</option>
+						<option value="31">Stolen Truck</option>
+						<option value="32">Suicide</option>
+						<option value="33">Suspicious OCC</option>
+						<option value="34">Trespass</option>
+						<option value="35">Vandalism</option>
+						<option value="36">Vehicle Theft</option>
+						<option value="37">Warrants</option>
+						<option value="38">Weapon Laws</option>
+
 				    </select>
 				    <script src="multiple-select-master/multiple-select.js"></script>
 				    <script>
 				        $('select').multipleSelect({
-				        	placeholder: "Select Crime Category/Categories"
+				        	placeholder: "Select Crime Category/Categories",
+				        	width: 350,
+            				multiple: true,
+            				multipleWidth: 165
 				        });
 				    </script>
 					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
@@ -105,13 +109,16 @@
 				<div>
 					<h3>Resolution of Crime</h3>
 					<select multiple="multiple">
-						<option value="101">None</option>
-				        <option value="102">Arrested/Booked</option>
+						<option value="101">Arrested/Booked</option>
+				        <option value="102">None</option>
 				    </select>
 				    <script src="multiple-select-master/multiple-select.js"></script>
 				    <script>
 				        $('select').multipleSelect({
-				        	placeholder: "Select Crime Resolution(s)"
+				        	placeholder: "Select Crime Resolution(s)",
+				        	width: 350,
+            				multiple: true,
+            				multipleWidth: 165
 				        });
 				    </script>
 					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
@@ -133,7 +140,10 @@
 				    <script src="multiple-select-master/multiple-select.js"></script>
 				    <script>
 				        $('select').multipleSelect({
-				        	placeholder: "Select Day(s) of the Week"
+				        	placeholder: "Select Day(s) of the Week",
+				        	width: 350,
+            				multiple: true,
+            				multipleWidth: 110
 				        });
 				    </script>
 					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
@@ -173,9 +183,9 @@
 				    <script>
 				        $('select').multipleSelect({
 				        	placeholder: "Select Time(s) of Day",
-				        	width: 250,
+				        	width: 350,
             				multiple: true,
-            				multipleWidth: 100
+            				multipleWidth: 110
 				        });
 				    </script>
 					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
