@@ -54,15 +54,16 @@ var zoom = d3.behavior.zoom()
 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
 		points.attr("transform", "translate("+
 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+		console.log(d3.event.translate);
 	});
 
 
 var dragOne = d3.behavior.drag()
 	.on("drag", function(d, i){
-		d.x += d3.event.dx;
-		d.y += d3.event.dy;		
+		d.x += d3.event.dx*currScale;
+		d.y += d3.event.dy*currScale;
 		d3.select(this).attr("transform", function(d, i){
-			
+			return "translate(" + [ d.x,d.y ] + ")scale("+currScale+")";
 		});
 		pointOneLoc = projection.invert([d.x*currScale, d.y*currScale]);
 		query();
@@ -70,12 +71,12 @@ var dragOne = d3.behavior.drag()
 
 var dragTwo = d3.behavior.drag()
 	.on("drag", function(d, i){
-		d.x += d3.event.dx;
-		d.y += d3.event.dy;
+		d.x += d3.event.dx*currScale;
+		d.y += d3.event.dy*currScale;
 		d3.select(this).attr("transform", function(d, i){
 			return "translate(" + [ d.x,d.y ] + ")scale("+currScale+")";
 		});
-		pointOneLoc = projection.invert([d.x*currScale, d.y*currScale]);
+		pointTwoLoc = projection.invert([d.x*currScale, d.y*currScale]);
 		query();
 		//filterFromPoint(this.point, 1);
 		//get function 
@@ -173,7 +174,7 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-	console.log(data);
+
 	displayData = data.slice();
 
 	update();
