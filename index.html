@@ -23,11 +23,11 @@
 				<!-- Radius A -->
 				<div>
 					<h3>Radius Around Location A</h3>
-					<input type="range" min="1" max="20" value="0" step="1" onchange="showValue(this.value)"/>
-					<span id="range">1</span>
+					<input type="range" min="1" max="20" value="0" step="1" onchange="showValueA(this.value)"/>
+					<span id="radiusA">1</span>
 					<script type="text/javascript">
-					function showValue(newValue) {
-						document.getElementById("range").innerHTML=newValue;
+					function showValueA(newValue) {
+						document.getElementById("radiusA").innerHTML=newValue;
 					}
 					</script>
 					<!-- http://webtutsdepot.com/2010/04/24/html-5-slider-input-tutorial/ -->
@@ -37,11 +37,11 @@
 				<!-- Radius B -->
 				<div>
 					<h3>Radius Around Location B</h3>
-					<input type="range" min="1" max="20" value="0" step="1" onchange="showValue(this.value)"/>
-					<span id="range">1</span>
+					<input type="range" min="1" max="20" value="0" step="1" onchange="showValueB(this.value)"/>
+					<span id="radiusB">1</span>
 					<script type="text/javascript">
-					function showValue(newValue) {
-						document.getElementById("range").innerHTML=newValue;
+					function showValueB(newValue) {
+						document.getElementById("radiusB").innerHTML=newValue;
 					}
 					</script>
 					<!-- http://webtutsdepot.com/2010/04/24/html-5-slider-input-tutorial/ -->
