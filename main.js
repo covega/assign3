@@ -46,6 +46,7 @@ var g = svg.append('g');
 var marks;
 
 var zoom = d3.behavior.zoom()
+	.scaleExtent([1, 10])
 	.on("zoom", function() {
 		currScale = d3.event.scale;
 		g.attr("transform", "translate("+
@@ -54,45 +55,30 @@ var zoom = d3.behavior.zoom()
 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
 		points.attr("transform", "translate("+
 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-		console.log(d3.event.translate);
+	});
+
+var dragData = [{x: 0, y:0}, {x:0, y:0}];
+
+var drag = d3.behavior.drag()
+	.origin(function(d) {return d;})
+	.on("drag", function(d){
+  		d3.select(this)
+  			.attr("cx", d.x = d3.event.x)
+  			.attr("cy", d.y = d3.event.y);
+  		query();
 	});
 
 
-var dragOne = d3.behavior.drag()
-	.on("drag", function(d, i){
-		d.x += d3.event.dx*currScale;
-		d.y += d3.event.dy*currScale;
-		d3.select(this).attr("transform", function(d, i){
-			return "translate(" + [ d.x,d.y ] + ")scale("+currScale+")";
-		});
-		pointOneLoc = projection.invert([d.x*currScale, d.y*currScale]);
-		query();
-	});
+var points = svg.append("g")
+		.attr("class", 'point')
+	.selectAll("circle")
+		.data(dragData)
+	.enter().append("circle")
+		.attr("r", 10)	
+		.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })
+	.call(drag)
 
-var dragTwo = d3.behavior.drag()
-	.on("drag", function(d, i){
-		d.x += d3.event.dx*currScale;
-		d.y += d3.event.dy*currScale;
-		d3.select(this).attr("transform", function(d, i){
-			return "translate(" + [ d.x,d.y ] + ")scale("+currScale+")";
-		});
-		pointTwoLoc = projection.invert([d.x*currScale, d.y*currScale]);
-		query();
-		//filterFromPoint(this.point, 1);
-		//get function 
-	});	
-
-var pointOne = svg.append("circle")
-	.attr("class", 'point')
-	.attr("r", 10)
-	.data([{"x": 0, "y":0}])
-	.call(dragOne)
-
-var pointTwo = svg.append("circle")
-	.attr("class", 'point')
-	.attr("r", 10)
-	.data([{"x": 0, "y":0}])
-	.call(dragTwo)
 
 var points = svg.selectAll('circle');
 
@@ -161,9 +147,8 @@ var update = function(){
 var query = function(){
 
 	displayData = data.slice();
-
-	filterFromPoint(pointOneLoc, 1);
-	filterFromPoint(pointTwoLoc, 1);
+	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), 1);
+	//filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), 1);
 /*	for(var i = 0; i < queries.length; i++){
 
 	}*/
