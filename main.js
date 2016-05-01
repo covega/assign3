@@ -20,13 +20,12 @@ var svg = d3.select("#map").append("svg")
 	.attr("width", width)
 	.attr("height", height);
 
-// Add svg map at correct size, assumes map is saved in a subdirectory called "data"
-svg.append("image")
+// Add svg map at correct size
+var sfsvg = svg.append("image")
           .attr("width", width)
           .attr("height", height)
-          .attr("xlink:href", "sf-map.svg")
-          .call(d3.behavior.zoom().scaleExtent([1, 10]).on("zoom", zoom));
-
+          .attr("xlink:href", "sf-map.svg");
+          
 
 //END MAP SETUP
 
@@ -42,18 +41,30 @@ var queries;
 
 var pointOneLoc;
 var pointTwoLoc;
-
+var currScale = 1;
 var g = svg.append('g');
 var marks;
+
+var zoom = d3.behavior.zoom()
+	.on("zoom", function() {
+		currScale = d3.event.scale;
+		g.attr("transform", "translate("+
+			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+		sfsvg.attr("transform", "translate("+
+			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+		points.attr("transform", "translate("+
+			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+	});
+
 
 var dragOne = d3.behavior.drag()
 	.on("drag", function(d, i){
 		d.x += d3.event.dx;
 		d.y += d3.event.dy;		
 		d3.select(this).attr("transform", function(d, i){
-			return "translate(" + [ d.x,d.y ] + ")";
+			
 		});
-		pointOneLoc = projection.invert([d.x, d.y]);
+		pointOneLoc = projection.invert([d.x*currScale, d.y*currScale]);
 		query();
 	});
 
@@ -62,9 +73,9 @@ var dragTwo = d3.behavior.drag()
 		d.x += d3.event.dx;
 		d.y += d3.event.dy;
 		d3.select(this).attr("transform", function(d, i){
-			return "translate(" + [ d.x,d.y ] + ")";
+			return "translate(" + [ d.x,d.y ] + ")scale("+currScale+")";
 		});
-		pointTwoLoc = projection.invert([d.x, d.y]);
+		pointOneLoc = projection.invert([d.x*currScale, d.y*currScale]);
 		query();
 		//filterFromPoint(this.point, 1);
 		//get function 
@@ -82,8 +93,7 @@ var pointTwo = svg.append("circle")
 	.data([{"x": 0, "y":0}])
 	.call(dragTwo)
 
-
-var svg = g;
+var points = svg.selectAll('circle');
 
 var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
@@ -125,13 +135,10 @@ var filterByAttr = function(attr, val){
 	update();	
 }
 
-var zoom = function() {
-	console.log('zoom called');
-	 svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-}
+
 
 var update = function(){	
-	marks = svg.selectAll(".mark")
+	marks = g.selectAll(".mark")
 		.data(displayData,function(d){ return d.IncidentNumber; });
 
 	marks.exit().remove();
@@ -144,12 +151,9 @@ var update = function(){
       			d.Location[0], //longitude
       			d.Location[1] //latitude
     		]) + ")";
-		})	
+		})
 		.on("mouseover", label)
 		.on("mouseout", function() {info.html(""); });
-
-	console.log(d3.selectAll('svg'));
-
 }
 
 
@@ -175,10 +179,18 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	update();
 
 	var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
+	svg.call(zoom)
+	    .on("mousedown.zoom", null)
+    	.on("touchstart.zoom", null)
+    	.on("touchmove.zoom", null)
+    	.on("touchend.zoom", null);
+
 
 	//filterByAttr('Category', 'NON-CRIMINAL');
 //	filterFromPoint([-122.458220811697,37.7633123961354], 1);
 });
+
+
 
 
 
