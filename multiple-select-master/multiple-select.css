@@ -2,12 +2,15 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
+ @import "fonts.css";
+
 .ms-parent {
     display: inline-block;
     position: relative;
     vertical-align: middle;
     margin-left: 10px;
     font-size: 0.9em;
+    color: #212126;
 }
 
 .ms-choice {
@@ -21,7 +24,8 @@
     text-align: left;
     white-space: nowrap;
     line-height: 26px;
-    color: #444;
+    color: #212126;
+    font-size: 0.9em;
     text-decoration: none;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -49,7 +53,8 @@
 }
 
 .ms-choice > span.placeholder {
-    color: black;
+    color: #212126;
+    font-size: 0.9em;
 }
 
 .ms-choice > div {
@@ -74,7 +79,8 @@
     position: absolute;
     z-index: 1000;
     background: #fff;
-    color: #000;
+    color: #212126;
+    font-size: 0.9em;
     border: 1px solid #aaa;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -113,7 +119,7 @@
     padding: 0 20px 0 5px;
     margin: 0;
     outline: 0;
-    font-family: sans-serif;
+    font-family: Avenir-Medium;
     font-size: 1em;
     border: 1px solid #aaa;
     -webkit-border-radius: 0;

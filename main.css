@@ -1,19 +1,35 @@
+@import "fonts.css";
+
 body {
-    font-family: Tahoma, sans-serif;
-    font-size: 0.9em;
+	margin: 0;
+    font-family: Avenir-Medium;
+    font-size: 1.0em;
+    color: #212126;
+}
+
+a { 
+	color:#3288c4 
+}
+
+a:hover { 
+	color:#12588F 
 }
 
 h2 {
-	font: 1.6em Tahoma, sans-serif;
-	color: black;
-	margin-bottom: 10px;
+	font-size:1.6em; 
+	font-family: Avenir-Black;
+	font-weight: bold; 
+	letter-spacing: 1px;
+	color: #0a5791; 
+	margin-bottom: 3px;
 	text-align: center;
 }
 
 h3 {
-	font: 1.2em Tahoma, sans-serif;
-	color: black;
-	margin-bottom: 5px;
+	font-size: 1.0em;
+	font-family: Avenir-Medium;
+	color: #636366;
+	margin-bottom: 1px;
 	text-align: left;
 }
 
@@ -21,48 +37,59 @@ h3 {
 	background: white;
 	min-width: 780px;
 	max-width: 1260px;
-	margin: 10px auto;
+	margin: 0;
+	/*margin: 10px auto;*/
 }
 
 #header {
 	height:80px;
-	background: #adadad;
-	margin: 0;
+	background: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #adadad;
 	text-align: center
 }
 
 #main-content {
 	padding-left: 400px;
-	padding-top: 10px;
+	height: 750px;
+}
+
+#left-sidebar-inner {
+	width: 360px;
+	float: center;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #left-sidebar {
-	width: 360px;
-	height: 100%;
+	width: 400px;
+	height: 750px;
 	float: left;
-	margin-left: 5px;
+	background: #eeeeee;
 }
 
 #filter {
-	margin-top: 25px;
+	margin-bottom: 15px;
+	vertical-align: middle;
 }
 
-.slider {
-	width: 295px;
-	vertical-align: middle;
+.ui-slider {
+	width: 275px;
 	float: left;
 	margin-left: 15px;
 }
 
 .slider-text {
-	padding-left: 325px;
-	vertical-align: middle;
+	padding-left: 300px;
 }
 
 .sliderValue {
-	width: 25px; 
+	width: 30px; 
 	text-align: center;
 	font-size: 0.8em;
+    height: 15px;
+    color: #212126;
 }
 
 select {
@@ -78,6 +105,7 @@ input.time {
     width: 100px;
     height: 20px;
     font-size: 0.9em;
+    color: #212126;
 }
 
 input {
@@ -86,7 +114,45 @@ input {
     border-radius: 5px;
     padding: 3px;
     border: 1px solid #aaa;
+    font-family: Avenir-Medium;
+    color: #212126;
+    font-size: 0.9em;
     vertical-align: middle;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #212126;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	color: #212126;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  	color: #212126;
+}
+:-moz-placeholder { /* Firefox 18- */
+  	color: #212126;
+}
+
+#button {
+	width: 400;
+	margin-top: 30px;
+	text-align:center;
+}
+
+button.reset {
+	-webkit-border-radius: 3px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3px;
+    border: 1px solid #0a5791;
+	background-color: #0a5791;
+	width: 160px;
+	height:40px;
+	text-align: center;
+	font-family: Avenir-Black;
+	font-size: 1.2em;
+	letter-spacing: 2px;
+	color: #fff;
 }
 
 .mark {
@@ -94,11 +160,7 @@ input {
 }
 
 .point {
-	fill: #00bfff;
+	fill: #007fff;
 	z-index: 2;
 }
 
-.point-text {
-	color: black;
-	font: 1.2em Tahoma, sans-serif;
-}

@@ -27,185 +27,224 @@
 	<div id="page-wrap">
 		<div id="inside">
 			<div id="left-sidebar">
-				<h2>Filter Settings</h2>
-				
-				<!-- Radius A -->
-				<div id="filter">
-					<h3>Radius Around Location A</h3>
-					<div class="slider" id="sliderA"></div>
-					<div class="slider-text">
-						<input type="text" class="sliderValue" id="sliderA-radius" value=1 />
+				<div id="left-sidebar-inner">
+					<h2>Filter Settings</h2>
+
+					<!-- Radius A -->
+					<div id="filter">
+						<h3>Radius Around Location A</h3>
+						<div class="slider"  id="sliderA"></div>
+						<div class="slider-text">
+							<input type="text" class="sliderValue" id="sliderA-radius" value=5 /> mi
+						</div>
+
+						<script type="text/javascript">
+						$(document).ready(function() {
+							$("#sliderA").slider({
+								range: "min",
+								value: 5,
+								step:0.01,
+								min: 0.01,
+								max: 20,
+								slide: function(event, ui) {
+									$("#sliderA-radius").val(ui.value);
+								}
+							});
+
+							$("#sliderA-radius").change(function() {					   	
+								var valueA = this.value;
+								if (valueA > 20) {
+									valueA = 20;
+									$("#sliderA-radius").val(20);
+								}
+								if (valueA < 0.01) {
+									valueA = 0.01;
+									$("#sliderA-radius").val(0.01);
+								}
+								$("#sliderA").slider("value", parseInt(valueA));
+							});
+							$('.ui-widget-header').css('background','#BEBEC0');
+						});
+						</script>
+						<!-- https://jqueryui.com/slider/ -->
+						
 					</div>
-					
-					
-					<script type="text/javascript">
-					$(document).ready(function() {
-						$("#sliderA").slider({
-							range: "min",
-							value: 1,
-							step: 1,
-							min: 0,
-							max: 20,
-							slide: function(event, ui) {
-								$("#sliderA-radius").val(ui.value);
-							}
+
+
+					<!-- Radius B -->
+					<div id="filter">
+						<h3>Radius Around Location B</h3>
+						<div class="slider" id="sliderB"></div>
+						<div class="slider-text">
+							<input type="text" class="sliderValue" id="sliderB-radius" value=5 /> mi
+						</div>
+
+						<script type="text/javascript">
+						$(document).ready(function() {
+							$("#sliderB").slider({
+								range: "min",
+								value: 5,
+								step:0.01,
+								min: 0.01,
+								max: 20,
+								slide: function(event, ui) {
+									$("#sliderB-radius").val(ui.value);
+								}
+							});
+
+							$("#sliderB-radius").change(function() {					   	
+								var valueB = this.value;
+								if (valueB > 20) {
+									valueB = 20;
+									$("#sliderB-radius").val(20);
+								}
+								if (valueB < 0.01) {
+									valueB = 0.01;
+									$("#sliderB-radius").val(0.01);
+								}
+								$("#sliderB").slider("value", parseInt(valueB));
+							});
+							$('.ui-widget-header').css('background','#BEBEC0');r
 						});
-
-						$("#sliderA-radius").change(function() {					    	
-							var valueA = this.value;
-							$("#sliderA").slider("value", parseInt(valueA));
-						});
-					});
-					</script>
-				</div>
-
-
-				<!-- Radius B -->
-				<div id="filter">
-					<h3>Radius Around Location B</h3>
-					<div class="slider" id="sliderB"></div>
-					<div class="slider-text">
-						<input type="text" class="sliderValue" id="sliderB-radius" value=1 />
+						</script>
+						<!-- https://jqueryui.com/slider/ -->
 					</div>
-					
-					<script type="text/javascript">
-					$(document).ready(function() {
-						$("#sliderB").slider({
-							range: "min",
-							value: 1,
-							step: 1,
-							min: 0,
-							max: 20,
-							slide: function(event, ui) {
-								$("#sliderB-radius").val(ui.value);
-							}
+
+
+					<!-- Category -->
+					<div id="filter">
+						<h3>Category of Crime</h3>
+						<select multiple="multiple" id="category">
+							<option value="1">Arson*</option>
+							<option value="2">Assault*++</option>
+							<option value="3">Battery*</option>
+							<option value="4">Bribery</option>
+							<option value="5">Burglary*++</option>
+							<option value="6">Disorderly Conduct</option>
+							<option value="7">Driving Under the Influence</option>
+							<option value="8">Drug/Narcotic++</option>
+							<option value="9">Drunkenness</option>
+							<option value="10">Embezzlement</option>
+							<option value="11">Extortion</option>
+							<option value="12">Family Offenses</option>
+							<option value="13">Forgery/Counterfeiting</option>
+							<option value="14">Fraud++</option>
+							<option value="15">Gambling</option>
+							<option value="16">Kidnapping</option>
+							<option value="17">Larceny/Theft*++</option>
+							<option value="18">Liquor Laws</option>
+							<option value="19">Loitering</option>
+							<option value="20">Missing Person++</option>
+							<option value="21">Non-Criminal++</option>
+							<option value="22">Other Offenses</option>
+							<option value="23">Probation Violation</option>
+							<option value="24">Prostitu++tion</option>
+							<option value="25">Robbery*</option>
+							<option value="26">Run Away</option>
+							<option value="27">Secondary Codes</option>
+							<option value="28">Sex Offenses, Forcible*</option>
+							<option value="29">Sex Offenses, Non-Forcible</option>
+							<option value="30">Stolen Property</option>
+							<option value="31">Stolen Truck</option>
+							<option value="32">Suicide</option>
+							<option value="33">Suspicious OCC++</option>
+							<option value="34">Trespass</option>
+							<option value="35">Vandalism</option>
+							<option value="36">Vehicle Theft*++</option>
+							<option value="37">Warrants++</option>
+							<option value="38">Weapon Laws</option>
+						</select>
+
+						<script>
+						$("#category").multipleSelect({
+							allSelected: "All Crime Categories Selected",
+							width: 350,
+							multiple: true,
+							multipleWidth: 165
 						});
+						$("#category").multipleSelect('checkAll');
+						</script>
+						<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
+					</div>
 
-						$("#sliderB-radius").change(function() {					    	
-							var valueB = this.value;
-							$("#sliderB").slider("value", parseInt(valueB));
+
+					<!-- Resolution -->
+					<div id="filter">
+						<h3>Resolution of Crime</h3>
+						<select multiple="multiple" id="resolution">
+							<option value="101">Arrested, Booked</option>
+							<option value="102">Arrested, Cited</option>
+							<option value="103">Cleared-Contact Juvenile</option>
+							<option value="104">Complainant Refuses to Prosecute</option>
+							<option value="105">Exceptional Clearance</option>
+							<option value="106">Juvenile Booked</option>
+							<option value="107">Located</option>
+							<option value="108">None</option>
+							<option value="109">Not Prosecuted</option>
+							<option value="110">Psychopathic Case</option>
+							<option value="110">Unfounded</option>					
+						</select>
+
+						<script>
+						$("#resolution").multipleSelect({
+							allSelected: "All Crime Resolutions Selected",
+							width: 350,
+							multiple: true,
+							multipleWidth: 165
 						});
-					});
-					</script>
-				</div>
+						$("#resolution").multipleSelect('checkAll');
+						</script>
+						<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
+					</div>
 
 
-				<!-- Category -->
-				<div id="filter">
-					<h3>Category of Crime</h3>
-					<select multiple="multiple" id="category">
-						<option value="1">Arson</option>
-						<option value="2">Assault</option>
-						<option value="3">Battery</option>
-						<option value="4">Bribery</option>
-						<option value="5">Burglary</option>
-						<option value="6">Disorderly Conduct</option>
-						<option value="7">Driving Under the Influence</option>
-						<option value="8">Drug/Narcotic</option>
-						<option value="9">Drunkenness</option>
-						<option value="10">Embezzlement</option>
-						<option value="11">Extortion</option>
-						<option value="12">Family Offenses</option>
-						<option value="13">Forgery/Counterfeiting</option>
-						<option value="14">Fraud</option>
-						<option value="15">Gambling</option>
-						<option value="16">Kidnapping</option>
-						<option value="17">Larceny/Theft</option>
-						<option value="18">Liquor Laws</option>
-						<option value="19">Loitering</option>
-						<option value="20">Missing Person</option>
-						<option value="21">Non-Criminal</option>
-						<option value="22">Other Offenses</option>
-						<option value="23">Probation Violation</option>
-						<option value="24">Prostitution</option>
-						<option value="25">Robbery</option>
-						<option value="26">Run Away</option>
-						<option value="27">Secondary Codes</option>
-						<option value="28">Sex Offenses, Forcible</option>
-						<option value="29">Sex Offenses, Non-Forcible</option>
-						<option value="30">Stolen Property</option>
-						<option value="31">Stolen Truck</option>
-						<option value="32">Suicide</option>
-						<option value="33">Suspicious OCC</option>
-						<option value="34">Trespass</option>
-						<option value="35">Vandalism</option>
-						<option value="36">Vehicle Theft</option>
-						<option value="37">Warrants</option>
-						<option value="38">Weapon Laws</option>
-					</select>
-
-					<script>
-					$("#category").multipleSelect({
-						placeholder: "Select Crime Category/Categories",
-						width: 350,
-						multiple: true,
-						multipleWidth: 165
-					});
-					</script>
-					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
-				</div>
-				
-
-				<!-- Resolution -->
-				<div id="filter">
-					<h3>Resolution of Crime</h3>
-					<select multiple="multiple" id="resolution">
-						<option value="101">Arrested/Booked</option>
-						<option value="102">None</option>
-					</select>
-
-					<script>
-					$("#resolution").multipleSelect({
-						placeholder: "Select Crime Resolution(s)",
-						width: 350,
-						multiple: true,
-						multipleWidth: 165
-					});
-					</script>
-					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
-				</div>
+					<!-- Day of the Week -->
+					<div id="filter">
+						<h3>Day of the Week</h3>
+						<select multiple="multiple" id="dow">
+							<option value="201">Monday</option>
+							<option value="202">Tuesday</option>
+							<option value="203">Wednesday</option>
+							<option value="204">Thursday</option>
+							<option value="205">Friday</option>
+							<option value="206">Saturday</option>
+							<option value="207">Sunday</option>
+						</select>
+						<script>
+						$("#dow").multipleSelect({
+							allSelected: "All Days of the Week Selected",
+							width: 350,
+							multiple: true,
+							multipleWidth: 110
+						});
+						$("#dow").multipleSelect('checkAll');
+						</script>
+						<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
+					</div>
 
 
-				<!-- Day of the Week -->
-				<div id="filter">
-					<h3>Day of the Week</h3>
-					<select multiple="multiple" id="dow">
-						<option value="201">Monday</option>
-						<option value="202">Tuesday</option>
-						<option value="203">Wednesday</option>
-						<option value="204">Thursday</option>
-						<option value="205">Friday</option>
-						<option value="206">Saturday</option>
-						<option value="207">Sunday</option>
-					</select>
-					<script>
-					$("#dow").multipleSelect({
-						placeholder: "Select Day(s) of the Week",
-						width: 350,
-						multiple: true,
-						multipleWidth: 110
-					});
-					</script>
-					<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
-				</div>
+					<!-- Time of Day -->
+					<div id="filter">
+						<h3>Time of Day</h3>
+						<p id="todRange">
+							From <input type="text" class="time start" placeholder="12:00am"/> to <input type="text" class="time end" placeholder="12:00am"/>
+						</p>
 
+						<script>
+						$('#todRange .time').timepicker({
+							'timeFormat': 'g:ia',
+							'step': 15
+						});
+						$('#todRange').datepair();
+						</script>
+						<!-- https://github.com/jonthornton/jquery-timepicker -->
 
-				<!-- Time of Day -->
-				<div id="filter">
-					<h3>Time of Day</h3>
-					<p id="todRange">
-						From &nbsp; <input type="text" class="time start" /> &nbsp; to &nbsp; <input type="text" class="time end" />
-					</p>
+					</div>
 
-					<script>
-					$('#todRange .time').timepicker({
-						'timeFormat': 'g:ia',
-						'step': 15
-					});
-					$('#todRange').datepair();
-					</script>
-					<!-- https://github.com/jonthornton/jquery-timepicker -->
-					
+					<div id=button>
+						<button type="reset" class="reset" value="Reset">Reset</button>
+					</div>
+
 				</div>
 
 			</div>
