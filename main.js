@@ -61,15 +61,26 @@ var dragData = [{x: 0, y:0}, {x:0, y:0}];
 
 var drag = d3.behavior.drag()
 	.origin(function(d) {return d;})
-	.on("drag", function(d){
-  		d3.select(this)
-  			.attr("cx", d.x = d3.event.x)
-  			.attr("cy", d.y = d3.event.y);
-  		query();
-	});
+	.on("dragstart", dragstarted)
+	.on("drag", dragged)
+	.on("dragend", dragended);
 
+function dragstarted(d){
+  d3.event.sourceEvent.stopPropagation();
+}
 
-var points = svg.append("g")
+function dragged(d){
+	d3.select(this)
+		.attr("cx", d.x = d3.event.x)
+		.attr("cy", d.y = d3.event.y);
+	query();	
+}
+
+function dragended(d){
+
+}
+
+svg.append("g")
 		.attr("class", 'point')
 	.selectAll("circle")
 		.data(dragData)
@@ -80,7 +91,7 @@ var points = svg.append("g")
 	.call(drag)
 
 
-var points = svg.selectAll('circle');
+var points = svg.selectAll('.point');
 
 var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
@@ -122,7 +133,19 @@ var filterByAttr = function(attr, val){
 	update();	
 }
 
+var filterByTime = function(start, end){
+	if(!start || !end) return;
+	var toRemove = [];
 
+	for(var i = 0; i < displayData.length; i++){
+		if(displayData[attr] !== val){
+			toRemove.push(i);
+		}
+	}	
+	removeElements(toRemove);
+
+	update();		
+}
 
 var update = function(){	
 	marks = g.selectAll(".mark")
@@ -132,7 +155,7 @@ var update = function(){
 
 	marks.enter().append("circle")
 		.attr("class", "mark")
-		.attr("r", 2)	
+		.attr("r", 1)	
 			.attr("transform", function(d) {
     		return "translate(" + projection([
       			d.Location[0], //longitude
@@ -148,7 +171,7 @@ var query = function(){
 
 	displayData = data.slice();
 	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), 1);
-	//filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), 1);
+	filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), 1);
 /*	for(var i = 0; i < queries.length; i++){
 
 	}*/
@@ -159,18 +182,13 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-
+	console.log(data);
 	displayData = data.slice();
 
 	update();
 
-	var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
+	//var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
 	svg.call(zoom)
-	    .on("mousedown.zoom", null)
-    	.on("touchstart.zoom", null)
-    	.on("touchmove.zoom", null)
-    	.on("touchend.zoom", null);
-
 
 	//filterByAttr('Category', 'NON-CRIMINAL');
 //	filterFromPoint([-122.458220811697,37.7633123961354], 1);
