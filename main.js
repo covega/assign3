@@ -20,12 +20,12 @@ var svg = d3.select("#map").append("svg")
 	.attr("width", width)
 	.attr("height", height);
 
-// Add svg map at correct size, assumes map is saved in a subdirectory called "data"
-svg.append("image")
+// Add svg map at correct size
+var sfsvg = svg.append("image")
           .attr("width", width)
           .attr("height", height)
           .attr("xlink:href", "sf-map.svg");
-
+          
 
 //END MAP SETUP
 
@@ -36,110 +36,147 @@ var info = d3.select("body").append("div")
 
 var displayData = {};
 var data = {};
+//user quiers stored here?
+var queries;
 
-/*START draggables*/
-var drag = d3.behavior.drag()
-	.on("drag", function(d, i){
-		d.x += d3.event.dx;
-		d.y += d3.event.dy;
-		d3.select(this).attr("transform", function(d, i){
-			return "translate(" + [ d.x,d.y ] + ")";
-		});
-		var point = projection.invert([d.x, d.y]);
-		filterFromPoint(point, 1);
-		//get function 
+var pointOneLoc;
+var pointTwoLoc;
+var currScale = 1;
+var g = svg.append('g');
+var marks;
+
+var zoom = d3.behavior.zoom()
+	.scaleExtent([1, 10])
+	.on("zoom", function() {
+		currScale = d3.event.scale;
+		g.attr("transform", "translate("+
+			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+		sfsvg.attr("transform", "translate("+
+			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+		points.attr("transform", "translate("+
+			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
 	});
 
-var pointOne = svg.append("circle")
-	.attr("class", 'point')
-	.attr("r", 10)
-	.data([{"x": 0, "y":0}])
-	.call(drag);
+var dragData = [{x: 0, y:0}, {x:0, y:0}];
 
-var pointTwo = svg.append("circle")
-	.attr("class", 'point')
-	.attr("r", 10)
-	.data([{"x": 0, "y":0}])
-	.call(drag);
-
-/*END draggables*/
+var drag = d3.behavior.drag()
+	.origin(function(d) {return d;})
+	.on("drag", function(d){
+  		d3.select(this)
+  			.attr("cx", d.x = d3.event.x)
+  			.attr("cy", d.y = d3.event.y);
+  		query();
+	});
 
 
-var svg = svg.append('g');
-var marks;
+var points = svg.append("g")
+		.attr("class", 'point')
+	.selectAll("circle")
+		.data(dragData)
+	.enter().append("circle")
+		.attr("r", 10)	
+		.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })
+	.call(drag)
+
+
+var points = svg.selectAll('circle');
 
 var label = function(d){
 	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
 }
 
-/*on adding/removing data
-
-Users will have queries selected
-We have to add and remove from the entire data set each time
-
-
-*/
+var removeElements = function(toRemove){
+	for(var i = toRemove.length-1; i >=0; i--){
+		displayData.splice(toRemove[i], 1);
+	}	
+}
 
 //test
 var filterFromPoint = function(point, radius){
-	//this is selecting the right data points
-	displayData = [];
-	for(var i = 0; i < data.length; i++){
-		if(d3.geo.distance(point, data[i].Location) * EARTH_RADIUS_MILES < radius){
-			displayData.push(data[i]);
-		}	
-	}	
+	if(!point || !radius) return;
 
+	var toRemove = [];
+	//this is selecting the right data points
+	for(var i = 0; i < displayData.length; i++){
+		if(d3.geo.distance(point, displayData[i].Location) * EARTH_RADIUS_MILES > radius){
+			toRemove.push(i);
+		}	
+	}
+	removeElements(toRemove);
+	
 	update();
 }
 
 var filterByAttr = function(attr, val){
+	if(!attr || !val) return;
+	var toRemove = [];
+
 	for(var i = 0; i < displayData.length; i++){
-		if(displayData[i][attr] == val){
-			displayData.push(data[i])
-		}	
-	}
+		if(displayData[attr] !== val){
+			toRemove.push(i);
+		}
+	}	
+	removeElements(toRemove);
 
 	update();	
 }
 
+
+
 var update = function(){	
-	marks = svg.selectAll(".mark")
+	marks = g.selectAll(".mark")
 		.data(displayData,function(d){ return d.IncidentNumber; });
 
-	console.log(marks.exit());
-	console.log(marks.enter());
 	marks.exit().remove();
 
 	marks.enter().append("circle")
 		.attr("class", "mark")
-		.attr("r", 2)			
+		.attr("r", 2)	
 			.attr("transform", function(d) {
     		return "translate(" + projection([
       			d.Location[0], //longitude
       			d.Location[1] //latitude
     		]) + ")";
-		})			
+		})
 		.on("mouseover", label)
 		.on("mouseout", function() {info.html(""); });
 }
 
+
+var query = function(){
+
+	displayData = data.slice();
+	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), 1);
+	//filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), 1);
+/*	for(var i = 0; i < queries.length; i++){
+
+	}*/
+}
 
 
 d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-	console.log(data);
+
 	displayData = data.slice();
 
 	update();
 
 	var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
+	svg.call(zoom)
+	    .on("mousedown.zoom", null)
+    	.on("touchstart.zoom", null)
+    	.on("touchmove.zoom", null)
+    	.on("touchend.zoom", null);
+
 
 	//filterByAttr('Category', 'NON-CRIMINAL');
 //	filterFromPoint([-122.458220811697,37.7633123961354], 1);
 });
+
+
 
 
 
