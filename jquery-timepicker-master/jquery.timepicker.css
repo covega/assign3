@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 .ui-timepicker-wrapper {
 	overflow-y: auto;
 	height: 150px;
@@ -17,7 +19,7 @@
 	outline: none;
 	z-index: 10001;
 	margin: 0;
-	font: 0.9em Tahoma, sans-serif;
+	font-size: 0.9em;
 }
 
 .ui-timepicker-wrapper.ui-timepicker-with-duration {
@@ -47,14 +49,14 @@
 	padding: 3px 0 3px 5px;
 	cursor: pointer;
 	white-space: nowrap;
-	color: #000;
+	color: #212126;
 	list-style: none;
 	margin: 0;
 }
 
 .ui-timepicker-list:hover .ui-timepicker-selected {
 	background: #fff; 
-	color: #000;
+	color: #212126;
 }
 
 li.ui-timepicker-selected,
