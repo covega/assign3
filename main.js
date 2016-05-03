@@ -100,21 +100,6 @@ svg.append("g")
 
 var points = svg.selectAll('.point');
 
-//http://stackoverflow.com/questions/15083548/convert-12-hour-hhmm-am-pm-to-24-hour-hhmm
-function convertTime(time){
-	var time = $("#starttime").val();
-	var hours = Number(time.match(/^(\d+)/)[1]);
-	var minutes = Number(time.match(/:(\d+)/)[1]);
-	var AMPM = time.match(/\s(.*)$/)[1];
-	if(AMPM == "pm" && hours<12) hours = hours+12;
-	if(AMPM == "am" && hours==12) hours = hours-12;
-	var sHours = hours.toString();
-	var sMinutes = minutes.toString();
-	if(hours<10) sHours = "0" + sHours;
-	if(minutes<10) sMinutes = "0" + sMinutes;
-	return sHours + sMinutes;
-}
-
 var removeElements = function(toRemove){
 	for(var i = toRemove.length-1; i >=0; i--){
 		displayData.splice(toRemove[i], 1);
