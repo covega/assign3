@@ -1,8 +1,10 @@
-@import "fonts.css";
+
 
 body {
 	margin: 0;
-    font-family: Avenir-Medium;
+    font-family: 'NimbusSansLRegular'; 
+   	font-weight: normal; 
+   	font-style: normal; 
     font-size: 1.0em;
     color: #212126;
 }
@@ -17,7 +19,7 @@ a:hover {
 
 h2 {
 	font-size:1.6em; 
-	font-family: Avenir-Black;
+	font-family: 'NimbusSansLBold';
 	font-weight: bold; 
 	letter-spacing: 1px;
 	color: #0a5791; 
@@ -27,7 +29,8 @@ h2 {
 
 h3 {
 	font-size: 1.0em;
-	font-family: Avenir-Medium;
+	font-family: 'NimbusSansLRegular';
+	font-weight: bold; 
 	color: #636366;
 	margin-bottom: 1px;
 	text-align: left;
@@ -114,7 +117,7 @@ input {
     border-radius: 5px;
     padding: 3px;
     border: 1px solid #aaa;
-    font-family: Avenir-Medium;
+    font-family: 'NimbusSansLRegular';
     color: #212126;
     font-size: 0.9em;
     vertical-align: middle;
@@ -149,7 +152,8 @@ button.reset {
 	width: 160px;
 	height:40px;
 	text-align: center;
-	font-family: Avenir-Black;
+	font-family: 'NimbusSansLRegular';
+	font-weight: bold; 
 	font-size: 1.2em;
 	letter-spacing: 2px;
 	color: #fff;
