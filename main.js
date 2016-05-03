@@ -170,8 +170,8 @@ var update = function(){
 var query = function(){
 
 	displayData = data.slice();
-	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), 1);
-	filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), 1);
+	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), sliderARadius);
+	filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), sliderBRadius);
 /*	for(var i = 0; i < queries.length; i++){
 
 	}*/
@@ -186,6 +186,7 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	displayData = data.slice();
 
 	update();
+	query();
 
 	//var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
 	svg.call(zoom)
