@@ -20,6 +20,7 @@ var projection = d3.geo.mercator()
 // This is the mapping between <longitude, latitude> position to <x, y> pixel position on the map
 // projection([lon, lat]) returns [x, y]
 
+//TODO: this doesn't seem responsive
 // Add an svg element to the DOM
 var svg = d3.select("#map").append("svg")
 	//.attr("width", width)
