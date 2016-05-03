@@ -186,14 +186,46 @@
 							<option value="207">Su</option>
 						</select>
 						<script>
-						$("#dow").multipleSelect({
-							allSelected: "All Days of the Week Selected",
-							width: 350,
-							multiple: true,
-							multipleWidth: 45,
-							minimumCountSelected: 7
+						var days = {
+							Monday:true,
+							Tuesday:true,
+							Wednesday:true,
+							Thursday:true,
+							Friday:true,
+							Saturday:true,
+							Sunday:true,
+						};
+						var daysKeys =  Object.keys(days);
+						$(document).ready(function(){
+							$("#dow").multipleSelect({
+								allSelected: "All Days of the Week Selected",
+								width: 350,
+								multiple: true,
+								multipleWidth: 45,
+								minimumCountSelected: 7,
+								onCheckAll: function(view) {
+									for(var i = 0; i <daysKeys.length; i++){
+										days[daysKeys[i]] = true;
+									}
+									if(data) query();
+								},
+								onUncheckAll: function(view) {
+									for(var i = 0; i <daysKeys.length; i++){
+										days[daysKeys[i]] = false;
+									}
+									query();																
+								},
+								onClick: function(view) {
+									if(view.checked){
+										days[daysKeys[view.value - 201]] = true;
+									} else {
+										days[daysKeys[view.value - 201]] = false;
+									}
+									query();
+								}
+							});
+							$("#dow").multipleSelect('checkAll');
 						});
-						$("#dow").multipleSelect('checkAll');
 						</script>
 						<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
 					</div>

@@ -1,3 +1,4 @@
+
 //CONSTS
 var EARTH_RADIUS_MILES = 3959;
 
@@ -131,7 +132,16 @@ var filterByAttr = function(attr, val){
 		}
 	}	
 	removeElements(toRemove);
+}
 
+function filterByDays (days){
+	var toRemove = [];
+	for(var i = 0; i < displayData.length; i++){
+		if(!days[displayData[i].DayOfWeek]){
+			toRemove.push(i)
+		}
+	}
+	removeElements(toRemove);
 }
 
 function dateFormat(time){
@@ -210,13 +220,15 @@ var update = function(){
 }
 
 
-var query = function(){
+function query(){
+	if(!data.length) return;
 	displayData = data.slice();
 	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), sliderARadius);
 	filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), sliderBRadius);
-	filterByTime(startTime, endTime);
-
-	update();	
+	filterByTime(startTime, endTime);	
+	filterByDays(days);
+	console.log(days);
+	update();
 }
 
 
@@ -224,7 +236,7 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-	//console.log(data);
+	console.log(data);
 	displayData = data.slice();
 
 	query();
@@ -235,7 +247,6 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	//filterByAttr('Category', 'NON-CRIMINAL');
 //	filterFromPoint([-122.458220811697,37.7633123961354], 1);
 });
-
 
 
 
