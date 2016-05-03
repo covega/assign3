@@ -22,8 +22,10 @@ var projection = d3.geo.mercator()
 
 // Add an svg element to the DOM
 var svg = d3.select("#map").append("svg")
-	.attr("width", width)
-	.attr("height", height);
+	//.attr("width", width)
+	//.attr("height", height);
+	.attr("preserveAspectRatio", "xMidYMid")
+  	.attr("viewBox", "0 0 " + width + " " + height);
 
 // Add svg map at correct size
 var sfsvg = svg.append("image")

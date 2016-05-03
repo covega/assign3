@@ -4,6 +4,10 @@
 <head>
 	<title>assign3</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
+
+	<!-- OPEN SOURCE FONT -->	
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/arco-perpetuo" type="text/css"/>
+	
 	<!-- JQUERY STUFF -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -116,7 +120,7 @@
 								sliderBRadius = valueB;
 								query();
 							});
-							$('.ui-widget-header').css('background','#BEBEC0');r
+							$('.ui-widget-header').css('background','#BEBEC0');
 						});
 						</script>
 						<!-- https://jqueryui.com/slider/ -->
@@ -127,52 +131,18 @@
 					<div id="filter">
 						<h3>Category of Crime</h3>
 						<select multiple="multiple" id="category">
-							<option value="1">Arson*</option>
-							<option value="2">Assault*++</option>
-							<option value="3">Battery*</option>
-							<option value="4">Bribery</option>
-							<option value="5">Burglary*++</option>
-							<option value="6">Disorderly Conduct</option>
-							<option value="7">Driving Under the Influence</option>
-							<option value="8">Drug/Narcotic++</option>
-							<option value="9">Drunkenness</option>
-							<option value="10">Embezzlement</option>
-							<option value="11">Extortion</option>
-							<option value="12">Family Offenses</option>
-							<option value="13">Forgery/Counterfeiting</option>
-							<option value="14">Fraud++</option>
-							<option value="15">Gambling</option>
-							<option value="16">Kidnapping</option>
-							<option value="17">Larceny/Theft*++</option>
-							<option value="18">Liquor Laws</option>
-							<option value="19">Loitering</option>
-							<option value="20">Missing Person++</option>
-							<option value="21">Non-Criminal++</option>
-							<option value="22">Other Offenses</option>
-							<option value="23">Probation Violation</option>
-							<option value="24">Prostitu++tion</option>
-							<option value="25">Robbery*</option>
-							<option value="26">Run Away</option>
-							<option value="27">Secondary Codes</option>
-							<option value="28">Sex Offenses, Forcible*</option>
-							<option value="29">Sex Offenses, Non-Forcible</option>
-							<option value="30">Stolen Property</option>
-							<option value="31">Stolen Truck</option>
-							<option value="32">Suicide</option>
-							<option value="33">Suspicious OCC++</option>
-							<option value="34">Trespass</option>
-							<option value="35">Vandalism</option>
-							<option value="36">Vehicle Theft*++</option>
-							<option value="37">Warrants++</option>
-							<option value="38">Weapon Laws</option>
+							<option value="1">Personal/Violent</option>
+							<option value="2">Property</option>
+							<option value="3">White-Collar/Financial</option>
+							<option value="4">Victimless</option>
+							<option value="5">Other (Non-Criminal/Non-Violent)</option>
 						</select>
 
 						<script>
 						$("#category").multipleSelect({
 							allSelected: "All Crime Categories Selected",
 							width: 350,
-							multiple: true,
-							multipleWidth: 165,
+							minimumCountSelected: 7
 						});
 						$("#category").multipleSelect('checkAll');
 						</script>
@@ -184,25 +154,18 @@
 					<div id="filter">
 						<h3>Resolution of Crime</h3>
 						<select multiple="multiple" id="resolution">
-							<option value="101">Arrested, Booked</option>
-							<option value="102">Arrested, Cited</option>
-							<option value="103">Cleared-Contact Juvenile</option>
-							<option value="104">Complainant Refuses to Prosecute</option>
-							<option value="105">Exceptional Clearance</option>
-							<option value="106">Juvenile Booked</option>
-							<option value="107">Located</option>
-							<option value="108">None</option>
-							<option value="109">Not Prosecuted</option>
-							<option value="110">Psychopathic Case</option>
-							<option value="110">Unfounded</option>					
+							<option value="101">Arrest</option>
+							<option value="102">Juvenile Related</option>
+							<option value="103">None</option>
+							<option value="104">Not Prosecuted/Unfounded</option>
+							<option value="105">Other</option>		
 						</select>
 
 						<script>
 						$("#resolution").multipleSelect({
 							allSelected: "All Crime Resolutions Selected",
 							width: 350,
-							multiple: true,
-							multipleWidth: 165
+							minimumCountSelected: 7
 						});
 						$("#resolution").multipleSelect('checkAll');
 						</script>
@@ -214,20 +177,21 @@
 					<div id="filter">
 						<h3>Day of the Week</h3>
 						<select multiple="multiple" id="dow">
-							<option value="201">Monday</option>
-							<option value="202">Tuesday</option>
-							<option value="203">Wednesday</option>
-							<option value="204">Thursday</option>
-							<option value="205">Friday</option>
-							<option value="206">Saturday</option>
-							<option value="207">Sunday</option>
+							<option value="201">M</option>
+							<option value="202">Tu</option>
+							<option value="203">W</option>
+							<option value="204">Th</option>
+							<option value="205">F</option>
+							<option value="206">Sa</option>
+							<option value="207">Su</option>
 						</select>
 						<script>
 						$("#dow").multipleSelect({
 							allSelected: "All Days of the Week Selected",
 							width: 350,
 							multiple: true,
-							multipleWidth: 110
+							multipleWidth: 45,
+							minimumCountSelected: 7
 						});
 						$("#dow").multipleSelect('checkAll');
 						</script>
@@ -253,7 +217,9 @@
 
 					</div>
 
-					<div id=button>
+					<div id="spacer"></div>
+
+					<div id="button">
 						<button type="reset" class="reset" value="Reset">Reset</button>
 					</div>
 
