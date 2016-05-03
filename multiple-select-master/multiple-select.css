@@ -2,7 +2,7 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
- @import "fonts.css";
+ @import "../fonts.css";
 
 .ms-parent {
     display: inline-block;
