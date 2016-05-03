@@ -97,6 +97,20 @@ svg.append("g")
 
 var points = svg.selectAll('.point');
 
+//http://stackoverflow.com/questions/15083548/convert-12-hour-hhmm-am-pm-to-24-hour-hhmm
+function convertTime(time){
+	var time = $("#starttime").val();
+	var hours = Number(time.match(/^(\d+)/)[1]);
+	var minutes = Number(time.match(/:(\d+)/)[1]);
+	var AMPM = time.match(/\s(.*)$/)[1];
+	if(AMPM == "pm" && hours<12) hours = hours+12;
+	if(AMPM == "am" && hours==12) hours = hours-12;
+	var sHours = hours.toString();
+	var sMinutes = minutes.toString();
+	if(hours<10) sHours = "0" + sHours;
+	if(minutes<10) sMinutes = "0" + sMinutes;
+	return sHours + sMinutes;
+}
 
 var removeElements = function(toRemove){
 	for(var i = toRemove.length-1; i >=0; i--){
@@ -109,7 +123,6 @@ var filterFromPoint = function(point, radius){
 	if(!point || !radius) return;
 
 	var toRemove = [];
-	//this is selecting the right data points
 	for(var i = 0; i < displayData.length; i++){
 		if(d3.geo.distance(point, displayData[i].Location) * EARTH_RADIUS_MILES > radius){
 			toRemove.push(i);
@@ -133,17 +146,49 @@ var filterByAttr = function(attr, val){
 
 }
 
+function dateFormat(time){
+	time = time.substring(0, time.indexOf(':')) + time.substring(time.indexOf(':')+1, time.length);
+	if(time.length < 6) {
+		time = "0" + time;
+	}
+	if(time.substring(time.length-2, time.length) === 'pm'){
+		var hours = time.substring(0, 2);
+		hours = parseInt(hours) + 12;
+		time = time.substring(2, time.length);
+		time = hours + time;
+	} else if (time.substring(0, 2) === '12'){
+		var hours = time.substring(0, 2);
+		hours = '00';
+		time = time.substring(2, time.length);
+		time = hours + time;		
+	}
+	return parseInt(time.substring(0, time.length - 2));
+
+}
+
 var filterByTime = function(start, end){
 	if(!start || !end) return;
+	
+	start = dateFormat(start);
+	console.log(start);
+	end = dateFormat(end);
+	console.log(end);
 	var toRemove = [];
 
 	for(var i = 0; i < displayData.length; i++){
-		if(displayData[attr] !== val){
-			toRemove.push(i);
+		var time = displayData[i].Time.substring(0, 2) + displayData[i].Time.substring(3, displayData[i].Time.length);
+		if(start > end){
+			if(time < start && time > end){
+				toRemove.push(i);
+			}
+		} else {
+			if(time < start || time > end){
+				toRemove.push(i);
+			}
 		}
-	}	
+	}
+	console.log(toRemove);
 	removeElements(toRemove);
-
 }
 
 var update = function(){	
@@ -165,9 +210,10 @@ var update = function(){
             info.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-			info.html("Category: " + d.Category + "<br>Date: " + d.Date + 
-				"<br>Day: " + d.DayOfWeek + "<br>Time: " + d.Time +
-				"<br>Resolution: " + d.Resolution)
+			info.html("Category: " + d.Category + 
+				"<br>Resolution: " + d.Resolution +
+				"<br>Day: " + d.DayOfWeek + 
+				"<br>Time: " + d.Time )
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             })					
@@ -181,13 +227,11 @@ var update = function(){
 
 
 var query = function(){
-
 	displayData = data.slice();
 	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), sliderARadius);
 	filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), sliderBRadius);
-/*	for(var i = 0; i < queries.length; i++){
+	filterByTime(startTime, endTime);
 
-	}*/
 	update();	
 }
 
@@ -196,7 +240,7 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-	console.log(data);
+	//console.log(data);
 	displayData = data.slice();
 
 	query();
