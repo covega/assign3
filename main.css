@@ -166,9 +166,12 @@ button.reset {
 	z-index: 1;
 }
 
-.point.A, .point.B {
+.point.A {
 	fill: #007fff;
-	z-index: 2;
+}
+
+.point.B {
+	fill: #007fff;
 }
 
 #info {
@@ -184,4 +187,8 @@ button.reset {
     border: 0px;		
     border-radius: 8px;			
     pointer-events: none;	
+}
+
+.outline {
+	opacity: 0.3;
 }
