@@ -207,11 +207,18 @@
 						</p>
 
 						<script>
+						var startTime;
+						var endTime;
 						$('#todRange .time').timepicker({
 							'timeFormat': 'g:ia',
 							'step': 15
 						});
 						$('#todRange').datepair();
+						$('#todRange').on('changeTime', function(){
+							startTime = $('.time.start').val();
+							endTime = $('.time.end').val();
+							query();
+						})
 						</script>
 						<!-- https://github.com/jonthornton/jquery-timepicker -->
 
