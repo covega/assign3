@@ -131,7 +131,6 @@ var filterByAttr = function(attr, val){
 	}	
 	removeElements(toRemove);
 
-	update();	
 }
 
 var filterByTime = function(start, end){
@@ -145,7 +144,6 @@ var filterByTime = function(start, end){
 	}	
 	removeElements(toRemove);
 
-	update();		
 }
 
 var update = function(){	
@@ -190,6 +188,7 @@ var query = function(){
 /*	for(var i = 0; i < queries.length; i++){
 
 	}*/
+	update();	
 }
 
 
@@ -200,7 +199,6 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	console.log(data);
 	displayData = data.slice();
 
-	update();
 	query();
 
 	//var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
