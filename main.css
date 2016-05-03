@@ -2,10 +2,17 @@
 
 body {
 	margin: 0;
+<<<<<<< HEAD
     font-family: 'NimbusSansLRegular'; 
    	font-weight: normal; 
    	font-style: normal; 
     font-size: 1.0em;
+=======
+    font-family: 'ArcoPerpetuoRegular'; 
+   	font-weight: normal; 
+   	font-style: normal; 
+    font-size: 0.95em;
+>>>>>>> refs/remotes/origin/categories
     color: #212126;
 }
 
@@ -19,7 +26,11 @@ a:hover {
 
 h2 {
 	font-size:1.6em; 
+<<<<<<< HEAD
 	font-family: 'NimbusSansLBold';
+=======
+	font-family: 'ArcoPerpetuoBold';
+>>>>>>> refs/remotes/origin/categories
 	font-weight: bold; 
 	letter-spacing: 1px;
 	color: #0a5791; 
@@ -28,11 +39,16 @@ h2 {
 }
 
 h3 {
+<<<<<<< HEAD
 	font-size: 1.0em;
 	font-family: 'NimbusSansLRegular';
+=======
+	font-size: 1.05em;
+	font-family: 'ArcoPerpetuoRegular';
+>>>>>>> refs/remotes/origin/categories
 	font-weight: bold; 
 	color: #636366;
-	margin-bottom: 1px;
+	margin-bottom: 3px;
 	text-align: left;
 }
 
@@ -56,6 +72,8 @@ h3 {
 #main-content {
 	padding-left: 400px;
 	height: 750px;
+	min-width: 750px;
+	max-width: 100%-400px;
 }
 
 #left-sidebar-inner {
@@ -90,8 +108,8 @@ h3 {
 .sliderValue {
 	width: 30px; 
 	text-align: center;
-	font-size: 0.8em;
-    height: 15px;
+	font-size: 0.9em;
+    height: 13px;
     color: #212126;
 }
 
@@ -107,7 +125,7 @@ select {
 input.time {
     width: 100px;
     height: 20px;
-    font-size: 0.9em;
+    font-size: 0.95em;
     color: #212126;
 }
 
@@ -117,7 +135,11 @@ input {
     border-radius: 5px;
     padding: 3px;
     border: 1px solid #aaa;
+<<<<<<< HEAD
     font-family: 'NimbusSansLRegular';
+=======
+    font-family: 'ArcoPerpetuoRegular';
+>>>>>>> refs/remotes/origin/categories
     color: #212126;
     font-size: 0.9em;
     vertical-align: middle;
@@ -136,13 +158,10 @@ input {
   	color: #212126;
 }
 
-#button {
-	width: 400;
-	margin-top: 30px;
-	text-align:center;
-}
-
 button.reset {
+	display:block;
+	position: relative;
+	margin:0 auto;
 	-webkit-border-radius: 3px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -152,11 +171,21 @@ button.reset {
 	width: 160px;
 	height:40px;
 	text-align: center;
+<<<<<<< HEAD
 	font-family: 'NimbusSansLRegular';
 	font-weight: bold; 
 	font-size: 1.2em;
+=======
+	font-family: 'ArcoPerpetuoRegular';
+	font-weight: bold; 
+	font-size: 1.3em;
+>>>>>>> refs/remotes/origin/categories
 	letter-spacing: 2px;
 	color: #fff;
+}
+
+#spacer {
+	height: 20px;
 }
 
 .mark {
@@ -170,12 +199,14 @@ button.reset {
 
 #info {
     position: absolute;			
-    text-align: center;			
+    text-align: center;
     width: 200px;					
-    height: 70px;					
+    height: 86px;					
     padding: 2px;				
-    font: 14px sans-serif;		
-    background: lightsteelblue;	
+    font-size: 0.9em;
+    color: #212126;
+    background: #B0C4DE;
+    opacity: 0.9;	
     border: 0px;		
     border-radius: 8px;			
     pointer-events: none;	

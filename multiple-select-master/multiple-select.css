@@ -2,12 +2,15 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/categories
 .ms-parent {
     display: inline-block;
     position: relative;
     vertical-align: middle;
     margin-left: 10px;
-    font-size: 0.9em;
     color: #212126;
 }
 
@@ -23,7 +26,7 @@
     white-space: nowrap;
     line-height: 26px;
     color: #212126;
-    font-size: 0.9em;
+    font-size: 0.8em;
     text-decoration: none;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -52,7 +55,6 @@
 
 .ms-choice > span.placeholder {
     color: #212126;
-    font-size: 0.9em;
 }
 
 .ms-choice > div {
@@ -78,7 +80,7 @@
     z-index: 1000;
     background: #fff;
     color: #212126;
-    font-size: 0.9em;
+    font-size: 0.85em;
     border: 1px solid #aaa;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -117,8 +119,11 @@
     padding: 0 20px 0 5px;
     margin: 0;
     outline: 0;
+<<<<<<< HEAD
     /* font-family: */
     font-size: 1em;
+=======
+>>>>>>> refs/remotes/origin/categories
     border: 1px solid #aaa;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
