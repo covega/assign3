@@ -110,6 +110,31 @@ function draggedB(d){
 		.attr("cy", function(d) {return dragDataRadiusB[0].y; })	
 	query();	
 }
+
+//outline of
+svg.append("g")
+		.attr("class", "outline A")
+	.selectAll("circle")
+		.data(dragDataRadiusA)
+	.enter().append("circle")
+		.attr("r", function(d){
+			return sliderARadius*10;
+		})
+		.attr("cx", function(d) {return dragDataRadiusA[0].x; })
+		.attr("cy", function(d) {return dragDataRadiusA[0].y; })	
+
+
+svg.append("g")
+		.attr("class", "outline B")
+	.selectAll("circle")
+		.data(dragDataRadiusB)
+	.enter().append("circle")
+		.attr("r", function(d){
+			return sliderBRadius*10;
+		})
+		.attr("cx", function(d) {return dragDataRadiusB[0].x; })
+		.attr("cy", function(d) {return dragDataRadiusB[0].y; })
+
 //draggables
 svg.append("g")
 		.attr("class", 'point A')
@@ -132,29 +157,7 @@ svg.append("g")
 		.attr("cy", function(d) {return d.y; })
 	.call(dragB);
 
-//outline of
-svg.append("g")
-		.attr("class", "outline A")
-	.selectAll("circle")
-		.data(dragDataRadiusA)
-	.enter().append("circle")
-		.attr("r", function(d){
-			return sliderARadius;
-		})
-		.attr("cx", function(d) {return dragDataRadiusA[0].x; })
-		.attr("cy", function(d) {return dragDataRadiusA[0].y; })	
-
-
-svg.append("g")
-		.attr("class", "outline B")
-	.selectAll("circle")
-		.data(dragDataRadiusB)
-	.enter().append("circle")
-		.attr("r", function(d){
-			return sliderBRadius;
-		})
-		.attr("cx", function(d) {return dragDataRadiusB[0].x; })
-		.attr("cy", function(d) {return dragDataRadiusB[0].y; })	
+	
 
 
 var points = svg.selectAll('.point');
