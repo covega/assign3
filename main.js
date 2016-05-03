@@ -163,16 +163,13 @@ function dateFormat(time){
 		time = hours + time;		
 	}
 	return parseInt(time.substring(0, time.length - 2));
-
 }
 
 var filterByTime = function(start, end){
 	if(!start || !end) return;
 	
 	start = dateFormat(start);
-	console.log(start);
 	end = dateFormat(end);
-	console.log(end);
 	var toRemove = [];
 
 	for(var i = 0; i < displayData.length; i++){
@@ -187,7 +184,6 @@ var filterByTime = function(start, end){
 			}
 		}
 	}
-	console.log(toRemove);
 	removeElements(toRemove);
 }
 
