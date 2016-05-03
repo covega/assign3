@@ -1,6 +1,11 @@
 //CONSTS
 var EARTH_RADIUS_MILES = 3959;
 
+
+var info = d3.select("#map").append("div")
+    .attr("id", "info")
+    .style("opacity", 0);
+
 //BEGIN MAP SETUP
 
 // Set up size
@@ -29,8 +34,7 @@ var sfsvg = svg.append("image")
 
 //END MAP SETUP
 
-var info = d3.select("body").append("div")
-    .attr("id", "info");
+
 
 //BEGIN DATA IMPORT
 
@@ -57,7 +61,7 @@ var zoom = d3.behavior.zoom()
 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
 	});
 
-var dragData = [{x: 0, y:0}, {x:0, y:0}];
+var dragData = [{x: 200, y:400}, {x:400, y:400}];
 
 var drag = d3.behavior.drag()
 	.origin(function(d) {return d;})
@@ -93,9 +97,6 @@ svg.append("g")
 
 var points = svg.selectAll('.point');
 
-var label = function(d){
-	info.html("Category: " + d.Category + "<br>Date: " + d.Date + "<br>Day: " + d.DayOfWeek + "<br>Location: " + d.Location);
-}
 
 var removeElements = function(toRemove){
 	for(var i = toRemove.length-1; i >=0; i--){
@@ -155,15 +156,29 @@ var update = function(){
 
 	marks.enter().append("circle")
 		.attr("class", "mark")
-		.attr("r", 1)	
+		.attr("r", 2)	
 			.attr("transform", function(d) {
     		return "translate(" + projection([
       			d.Location[0], //longitude
       			d.Location[1] //latitude
     		]) + ")";
 		})
-		.on("mouseover", label)
-		.on("mouseout", function() {info.html(""); });
+		.on("mouseover", function(d) {
+            info.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+			info.html("Category: " + d.Category + "<br>Date: " + d.Date + 
+				"<br>Day: " + d.DayOfWeek + "<br>Time: " + d.Time +
+				"<br>Resolution: " + d.Resolution)
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+        .on("mouseout", function(d) {		
+        	info.html(""); 
+            info.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        })
 }
 
 
