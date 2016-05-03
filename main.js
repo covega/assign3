@@ -65,13 +65,16 @@ var zoom = d3.behavior.zoom()
 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
 	});
 
-var dragData = [{x: 200, y:400}, {x:400, y:400}];
+var dragDataA = [{x: 200, y:400}];
+var dragDataRadiusA = [{x: 200, y:400}];
+var dragDataB = [{x:400, y:400}];
+var dragDataRadiusB = [{x:400, y:400}];
+
 
 var drag = d3.behavior.drag()
 	.origin(function(d) {return d;})
 	.on("dragstart", dragstarted)
-	.on("drag", dragged)
-	.on("dragend", dragended);
+	.on("drag", dragged)	
 
 function dragstarted(d){
   d3.event.sourceEvent.stopPropagation();
@@ -84,20 +87,51 @@ function dragged(d){
 	query();	
 }
 
-function dragended(d){
-
-}
-
+//draggables
 svg.append("g")
-		.attr("class", 'point')
+		.attr("class", 'pointA')
 	.selectAll("circle")
-		.data(dragData)
+		.data(dragDataA)
 	.enter().append("circle")
 		.attr("r", 10)	
 		.attr("cx", function(d) {return d.x; })
 		.attr("cy", function(d) {return d.y; })
 	.call(drag)
 
+
+svg.append("g")
+		.attr("class", 'pointB')
+	.selectAll("circle")
+		.data(dragDataB)
+	.enter().append("circle")
+		.attr("r", 10)	
+		.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })
+
+//outline of
+/*svg.append("g")
+		.attr("class", "outlineA")
+	.selectAll("circle")
+		.data(dragDataRadiusA)
+	.enter().append("circle")
+		.attr("r", function(d){
+			return sliderBRadius;
+		})
+		.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })	
+
+
+svg.append("g")
+		.attr("class", "outlineB")
+	.selectAll("circle")
+		.data(dragDataRadiusB)
+	.enter().append("circle")
+		.attr("r", function(d){
+			return sliderBRadius;
+		})
+		.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })	
+*/
 
 var points = svg.selectAll('.point');
 
@@ -223,8 +257,8 @@ var update = function(){
 function query(){
 	if(!data.length) return;
 	displayData = data.slice();
-	filterFromPoint(projection.invert([dragData[0].x, dragData[0].y]), sliderARadius);
-	filterFromPoint(projection.invert([dragData[1].x, dragData[1].y]), sliderBRadius);
+	filterFromPoint(projection.invert([dragDataA[0].x, dragDataA[0].y]), sliderARadius);
+	filterFromPoint(projection.invert([dragDataB[0].x, dragDataB[0].y]), sliderBRadius);
 	filterByTime(startTime, endTime);	
 	filterByDays(days);
 	console.log(days);

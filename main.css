@@ -166,7 +166,7 @@ button.reset {
 	z-index: 1;
 }
 
-.point {
+.pointA, .pointB {
 	fill: #007fff;
 	z-index: 2;
 }
