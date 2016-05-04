@@ -1,5 +1,4 @@
-{
-    "categoriesMap":[
+{"categoriesMap":[
             {"Type":"Personal/Violent", "Category":"ASSAULT"},
             {"Type":"Personal/Violent", "Category":"BATTERY"},
             {"Type":"Personal/Violent", "Category":"FAMILY OFFENSES"},
@@ -37,24 +36,4 @@
             {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SEX OFFENSES, NON FORCIBLE"},
             {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SUICIDE"},
             {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SUSPICIOUS OCC"},
-            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"WARRANTS"}
-    ]
-}
-
-{
-    "resolutionsMap":[
-            {"Type":"Arrest", "Resolution":"ARREST, BOOKED"},
-            {"Type":"Arrest", "Resolution":"ARREST, CITED"},
-            {"Type":"Juvenile Related", "Resolution":"CLEARED-CONTACT JUVENILE FOR MORE INFO"},
-            {"Type":"Juvenile Related", "Resolution":"JUVENILE BOOKED"},
-            {"Type":"None", "Resolution":"NONE"},
-            {"Type":"Not Prosecuted/Unfounded", "Resolution":"NOT PROSECUTED"},
-            {"Type":"Not Prosecuted/Unfounded", "Resolution":"UNFOUNDED"},
-            {"Type":"Other", "Resolution":"COMPLAINANT REFUSES TO PROSECUTE"},
-            {"Type":"Other", "Resolution":"EXCEPTIONAL CLEARANCE"},
-            {"Type":"Other", "Resolution":"LOCATED"},
-            {"Type":"Other", "Resolution":"PSYCHOPATHIC CASE"}
-    ]
-}
-
-
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"WARRANTS"}]}

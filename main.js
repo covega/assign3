@@ -44,6 +44,8 @@ var sfsvg = svg.append("image")
 
 var displayData = {};
 var data = {};
+var category_groups = {};
+var resolution_groups = {};
 //user quiers stored here?
 var queries;
 
@@ -307,6 +309,8 @@ function query(){
 	filterFromPoint(projection.invert([dragDataB[0].x, dragDataB[0].y]), sliderBRadius);
 	filterByTime(startTime, endTime);	
 	filterByDays(days);
+	filterByCategories(types)
+	filterByResolutions(groups)
 	update();
 }
 
@@ -327,6 +331,88 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 //	filterFromPoint([-122.458220811697,37.7633123961354], 1);
 });
 
+function filterByCategories (types){
+	var toRemove = [];
+	var categories = {};
+	for(var i = 0; i < category_groups.length; i++){
+		if(types[category_groups[i].Type]){
+			categories[category_groups[i].Category]=true;
+		}
+	}
+	for(var i = 0; i < displayData.length; i++){
+		if(!categories[displayData[i].Category]){
+			toRemove.push(i);
+		}
+	}
+	removeElements(toRemove);
+}
 
+function filterByResolutions (groups){
+	var toRemove = [];
+	var resolutions = {};
+	for(var i = 0; i < resolution_groups.length; i++){
+		if(groups[resolution_groups[i].Type]){
+			resolutions[resolution_groups[i].Resolution]=true;
+		}
+	}
+	console.log(resolutions)
+	for(var i = 0; i < displayData.length; i++){
+		if(!resolutions[displayData[i].Resolution]){
+			toRemove.push(i);
+		}
+	}
+	removeElements(toRemove);
+}
 
+category_groups = [
+            {"Type":"Personal/Violent", "Category":"ASSAULT"},
+            {"Type":"Personal/Violent", "Category":"BATTERY"},
+            {"Type":"Personal/Violent", "Category":"FAMILY OFFENSES"},
+            {"Type":"Personal/Violent", "Category":"KIDNAPPING"},
+            {"Type":"Personal/Violent", "Category":"ROBBERY"},
+            {"Type":"Personal/Violent", "Category":"SEX OFFENSES, FORCIBLE"},
+            {"Type":"Property", "Category":"ARSON"},
+            {"Type":"Property", "Category":"BURGLARY"},
+            {"Type":"Property", "Category":"LARCENY/THEFT"},
+            {"Type":"Property", "Category":"STOLEN PROPERTY"},
+            {"Type":"Property", "Category":"STOLEN TRUCK"},
+            {"Type":"Property", "Category":"TRESPASS"},
+            {"Type":"Property", "Category":"VANDALISM"},
+            {"Type":"Property", "Category":"VEHICLE THEFT"},
+            {"Type":"White-Collar/Financial", "Category":"BRIBERY"},
+            {"Type":"White-Collar/Financial", "Category":"EXTORTION"},
+            {"Type":"White-Collar/Financial", "Category":"EMBEZZLEMENT"},
+            {"Type":"White-Collar/Financial", "Category":"FORGERY/COUNTERFEITING"},
+            {"Type":"White-Collar/Financial", "Category":"FRAUD"},
+            {"Type":"Victimless", "Category":"DRUG/NARCOTIC"},
+            {"Type":"Victimless", "Category":"DRUNKENNESS"},
+            {"Type":"Victimless", "Category":"DRIVING UNDER THE INFLUENCE"},
+            {"Type":"Victimless", "Category":"GAMBLING"},
+            {"Type":"Victimless", "Category":"LIQUOR LAWS"},
+            {"Type":"Victimless", "Category":"PROSTITUTION"},
+            {"Type":"Victimless", "Category":"WEAPON LAWS"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"DISORDERLY CONDUCT"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"LOITERING"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"MISSING PERSON"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"NON-CRIMINAL"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"OTHER OFFENSES"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"PROBATION VIOLATION"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"RUNAWAY"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SECONDARY CODES"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SEX OFFENSES, NON FORCIBLE"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SUICIDE"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"SUSPICIOUS OCC"},
+            {"Type":"Other (Non-Criminal/Non-Violent)", "Category":"WARRANTS"}]
 
+resolution_groups = [
+            {"Type":"Arrest", "Resolution":"ARREST, BOOKED"},
+            {"Type":"Arrest", "Resolution":"ARREST, CITED"},
+            {"Type":"Juvenile Related", "Resolution":"CLEARED-CONTACT JUVENILE FOR MORE INFO"},
+            {"Type":"Juvenile Related", "Resolution":"JUVENILE BOOKED"},
+            {"Type":"None", "Resolution":"NONE"},
+            {"Type":"Not Prosecuted/Unfounded", "Resolution":"NOT PROSECUTED"},
+            {"Type":"Not Prosecuted/Unfounded", "Resolution":"UNFOUNDED"},
+            {"Type":"Other", "Resolution":"COMPLAINANT REFUSES TO PROSECUTE"},
+            {"Type":"Other", "Resolution":"EXCEPTIONAL CLEARANCE"},
+            {"Type":"Other", "Resolution":"LOCATED"},
+            {"Type":"Other", "Resolution":"PSYCHOPATHIC CASE"}]

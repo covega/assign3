@@ -142,12 +142,42 @@
 						</select>
 
 						<script>
-						$("#category").multipleSelect({
-							allSelected: "All Crime Categories Selected",
-							width: 350,
-							minimumCountSelected: 7
+						var types = {
+							"Personal/Violent":true,
+							"Property":true,
+							"White-Collar/Financial":true,
+							"Victimless":true,
+							"Other (Non-Criminal/Non-Violent)":true,
+						};
+						var typesKeys =  Object.keys(types);
+						$(document).ready(function(){
+							$("#category").multipleSelect({
+								allSelected: "All Crime Categories Selected",
+								width: 350,
+								minimumCountSelected: 7, 
+								onCheckAll: function(view) {
+									for(var i = 0; i <typesKeys.length; i++){
+										types[typesKeys[i]] = true;
+									}
+									if(data) query();
+								},
+								onUncheckAll: function(view) {
+									for(var i = 0; i <typesKeys.length; i++){
+										types[typesKeys[i]] = false;
+									}
+									query();																
+								},
+								onClick: function(view) {
+									if(view.checked){
+										types[typesKeys[view.value - 1]] = true;
+									} else {
+										types[typesKeys[view.value - 1]] = false;
+									}
+									query();
+								}
+							});
+							$("#category").multipleSelect('checkAll');
 						});
-						$("#category").multipleSelect('checkAll');
 						</script>
 						<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
 					</div>
@@ -165,12 +195,42 @@
 						</select>
 
 						<script>
-						$("#resolution").multipleSelect({
-							allSelected: "All Crime Resolutions Selected",
-							width: 350,
-							minimumCountSelected: 7
+						var groups= {
+							"Arrest":true,
+							"Juvenile Related":true,
+							"None":true,
+							"Not Prosecuted/Unfounded":true,
+							"Other":true,
+						};
+						var groupsKeys =  Object.keys(groups);
+						$(document).ready(function(){
+							$("#resolution").multipleSelect({
+								allSelected: "All Crime Resolutions Selected",
+								width: 350,
+								minimumCountSelected: 7, 
+								onCheckAll: function(view) {
+									for(var i = 0; i <groupsKeys.length; i++){
+										groups[groupsKeys[i]] = true;
+									}
+									if(data) query();
+								},
+								onUncheckAll: function(view) {
+									for(var i = 0; i <groupsKeys.length; i++){
+										groups[groupsKeys[i]] = false;
+									}
+									query();																
+								},
+								onClick: function(view) {
+									if(view.checked){
+										groups[groupsKeys[view.value - 101]] = true;
+									} else {
+										groups[groupsKeys[view.value - 101]] = false;
+									}
+									query();
+								}
+							});
+							$("#resolution").multipleSelect('checkAll');
 						});
-						$("#resolution").multipleSelect('checkAll');
 						</script>
 						<!-- http://wenzhixin.net.cn/p/multiple-select/docs/#documentation -->
 					</div>

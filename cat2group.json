@@ -4,7 +4,7 @@
             {"Category":"BATTERY", "Type":"Personal/Violent"},
             {"Category":"FAMILY OFFENSES", "Type":"Personal/Violent"},
             {"Category":"KIDNAPPING", "Type":"Personal/Violent"},
-            {"Type":"Personal/Violent", "Category":"ROBBERY"},
+            {"Category":"ROBBERY", "Type":"Personal/Violent"},
             {"Category":"SEX OFFENSES, FORCIBLE", "Type":"Personal/Violent"},
             {"Category":"ARSON", "Type":"Property"},
             {"Category":"BURGLARY", "Type":"Property"},
@@ -37,24 +37,6 @@
             {"Category":"SEX OFFENSES, NON FORCIBLE", "Type":"Other (Non-Criminal/Non-Violent)"},
             {"Category":"SUICIDE", "Type":"Other (Non-Criminal/Non-Violent)"},
             {"Category":"SUSPICIOUS OCC", "Type":"Other (Non-Criminal/Non-Violent)"},
-            {"Category":"WARRANTS", "Type":"Other (Non-Criminal/Non-Violent)"},
+            {"Category":"WARRANTS", "Type":"Other (Non-Criminal/Non-Violent)"}
     ]
 }
-
-{
-    "resolutionsMap":[
-            {"Resolution":"ARREST, BOOKED", "Type":"Arrest"},
-            {"Resolution":"ARREST, CITED", "Type":"Arrest"},
-            {"Resolution":"CLEARED-CONTACT JUVENILE FOR MORE INFO", "Type":"Juvenile Related"},
-            {"Resolution":"JUVENILE BOOKED", "Type":"Juvenile Related"},
-            {"Resolution":"NONE", "Type":"None"},
-            {"Resolution":"NOT PROSECUTED", "Type":"Not Prosecuted/Unfounded"},
-            {"Resolution":"UNFOUNDED", "Type":"Not Prosecuted/Unfounded"},
-            {"Resolution":"COMPLAINANT REFUSES TO PROSECUTE", "Type":"Other"},
-            {"Resolution":"EXCEPTIONAL CLEARANCE", "Type":"Other"},
-            {"Resolution":"LOCATED", "Type":"Other"},
-            {"Resolution":"PSYCHOPATHIC CASE", "Type":"Other"}
-    ]
-}
-
-

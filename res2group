@@ -1,0 +1,17 @@
+{
+    "resolutionsMap":[
+            {"Resolution":"ARREST, BOOKED", "Type":"Arrest"},
+            {"Resolution":"ARREST, CITED", "Type":"Arrest"},
+            {"Resolution":"CLEARED-CONTACT JUVENILE FOR MORE INFO", "Type":"Juvenile Related"},
+            {"Resolution":"JUVENILE BOOKED", "Type":"Juvenile Related"},
+            {"Resolution":"NONE", "Type":"None"},
+            {"Resolution":"NOT PROSECUTED", "Type":"Not Prosecuted/Unfounded"},
+            {"Resolution":"UNFOUNDED", "Type":"Not Prosecuted/Unfounded"},
+            {"Resolution":"COMPLAINANT REFUSES TO PROSECUTE", "Type":"Other"},
+            {"Resolution":"EXCEPTIONAL CLEARANCE", "Type":"Other"},
+            {"Resolution":"LOCATED", "Type":"Other"},
+            {"Resolution":"PSYCHOPATHIC CASE", "Type":"Other"}
+    ]
+}
+
+
