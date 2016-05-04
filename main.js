@@ -87,6 +87,12 @@ function zoomer() {
 }
 
 
+var milesToPixels =  d3.geo.distance([0, 0], [0, 1])*EARTH_RADIUS_MILES;
+
+//var milesToPixels = 
+
+console.log(milesToPixels);
+
 var dragDataA = [{x: 200, y:400}];
 var dragDataRadiusA = [{x: 200, y:400}];
 var dragDataB = [{x:400, y:400}];
@@ -124,13 +130,23 @@ function draggedB(d){
 		.attr("cx", d.x = d3.event.x)
 		.attr("cy", d.y = d3.event.y);
 	dragDataRadiusB[0].x = d3.event.x;
-	dragDataRadiusB[0].y = d3.event.y;		
+	dragDataRadiusB[0].y = d3.event.y;
 	var out = d3.select(".outline.B").select("circle")
 		.attr("cx", function(d) {return dragDataRadiusB[0].x; })
 		.attr("cy", function(d) {return dragDataRadiusB[0].y; })	
 	query();	
 }
 
+function updateRadii(){
+	d3.select('.outline.A').select('circle')
+		.attr("r", function(d){
+				return sliderARadius*milesToPixels + sliderARadius*3.14		
+		})	
+	d3.select('.outline.B').select('circle')
+		.attr("r", function(d){
+				return sliderBRadius*milesToPixels + sliderBRadius*3.14	
+		})		
+}
 //outline of
 svg.append("g")
 		.attr("class", "outline A")
@@ -138,7 +154,7 @@ svg.append("g")
 		.data(dragDataRadiusA)
 	.enter().append("circle")
 		.attr("r", function(d){
-			return sliderARadius*10;
+				return sliderARadius * milesToPixels + sliderARadius*3.14;
 		})
 		.attr("cx", function(d) {return dragDataRadiusA[0].x; })
 		.attr("cy", function(d) {return dragDataRadiusA[0].y; })	
@@ -150,7 +166,8 @@ svg.append("g")
 		.data(dragDataRadiusB)
 	.enter().append("circle")
 		.attr("r", function(d){
-			return sliderBRadius*10;
+			if(sliderBRadius)
+				return sliderBRadius * milesToPixels + sliderBRadius*3.14;
 		})
 		.attr("cx", function(d) {return dragDataRadiusB[0].x; })
 		.attr("cy", function(d) {return dragDataRadiusB[0].y; })
@@ -178,7 +195,6 @@ svg.append("g")
 	.call(dragB);
 
 	
-
 
 var points = svg.selectAll('.point');
 var outlines = svg.selectAll('.outline');
@@ -245,7 +261,7 @@ function dateFormat(time){
 	return parseInt(time.substring(0, time.length - 2));
 }
 
-var filterByTime = function(start, end){
+function filterByTime(start, end){
 	if(!start || !end) return;
 	
 	start = dateFormat(start);
@@ -262,6 +278,38 @@ var filterByTime = function(start, end){
 			if(time < start || time > end){
 				toRemove.push(i);
 			}
+		}
+	}
+	removeElements(toRemove);
+}
+
+function filterByCategories (types){
+	var toRemove = [];
+	var categories = {};
+	for(var i = 0; i < category_groups.length; i++){
+		if(types[category_groups[i].Type]){
+			categories[category_groups[i].Category]=true;
+		}
+	}
+	for(var i = 0; i < displayData.length; i++){
+		if(!categories[displayData[i].Category]){
+			toRemove.push(i);
+		}
+	}
+	removeElements(toRemove);
+}
+
+function filterByResolutions (groups){
+	var toRemove = [];
+	var resolutions = {};
+	for(var i = 0; i < resolution_groups.length; i++){
+		if(groups[resolution_groups[i].Type]){
+			resolutions[resolution_groups[i].Resolution]=true;
+		}
+	}
+	for(var i = 0; i < displayData.length; i++){
+		if(!resolutions[displayData[i].Resolution]){
+			toRemove.push(i);
 		}
 	}
 	removeElements(toRemove);
@@ -321,48 +369,12 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 
 	console.log(data);
 	displayData = data.slice();
-
 	query();
 
-	//var Categories = ['NON-CRIMINAL','LARCENY/THEFT','DRUG/NARCOTIC','VEHICLE THEFT','STOLEN TRUCK','BATTERY','BURGLARY','OTHER OFFENSES','ROBBERY','VANDALISM','PROBATION VIOLATION','ASSAULT','MISSING PERSON','FRAUD','STOLEN PROPERTY','WARRANTS','PROSTITUTION','WEAPON LAWS','LIQUOR LAWS','SUSPICIOUS OCC','SECONDARY CODES','SEX OFFENSES, FORCIBLE','SEX OFFENSES, NON FORCIBLE','DRUNKENNESS','TRESPASS','ARSON','DISORDERLY CONDUCT','KIDNAPPING','RUNAWAY','LOITERING','EMBEZZLEMENT','FORGERY/COUNTERFEITING','GAMBLING','DRIVING UNDER THE INFLUENCE','BRIBERY','SUICIDE','EXTORTION','FAMILY OFFENSES'];
 	svg.call(zoom)
-
-	//filterByAttr('Category', 'NON-CRIMINAL');
-//	filterFromPoint([-122.458220811697,37.7633123961354], 1);
 });
 
-function filterByCategories (types){
-	var toRemove = [];
-	var categories = {};
-	for(var i = 0; i < category_groups.length; i++){
-		if(types[category_groups[i].Type]){
-			categories[category_groups[i].Category]=true;
-		}
-	}
-	for(var i = 0; i < displayData.length; i++){
-		if(!categories[displayData[i].Category]){
-			toRemove.push(i);
-		}
-	}
-	removeElements(toRemove);
-}
 
-function filterByResolutions (groups){
-	var toRemove = [];
-	var resolutions = {};
-	for(var i = 0; i < resolution_groups.length; i++){
-		if(groups[resolution_groups[i].Type]){
-			resolutions[resolution_groups[i].Resolution]=true;
-		}
-	}
-	console.log(resolutions)
-	for(var i = 0; i < displayData.length; i++){
-		if(!resolutions[displayData[i].Resolution]){
-			toRemove.push(i);
-		}
-	}
-	removeElements(toRemove);
-}
 
 category_groups = [
             {"Type":"Personal/Violent", "Category":"ASSAULT"},

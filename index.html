@@ -46,18 +46,19 @@
 						</div>
 
 						<script type="text/javascript">
-						var sliderARadius = 5;
+						var sliderARadius = 2.5;
 						$(document).ready(function() {
-							var sliderAMax = 10;
+							var sliderAMax = 5;
 							$("#sliderA").slider({
 								range: "min",
-								value: 5,
+								value: 2.5,
 								step:0.01,
 								min: 0.01,
 								max: sliderAMax,
 								slide: function(event, ui) {
 									$("#sliderA-radius").val(ui.value);
 									sliderARadius = ui.value;
+									updateRadii();
 									query();
 								}
 							});
@@ -66,7 +67,7 @@
 								var valueA = this.value;
 								if (valueA > sliderAMax) {
 									valueA = sliderAMax;
-									$("#sliderA-radius").val(10);
+									$("#sliderA-radius").val(sliderAMax);
 								}
 								if (valueA < 0.01) {
 									valueA = 0.01;
@@ -74,6 +75,7 @@
 								}
 								$("#sliderA").slider("value", parseInt(valueA));
 								sliderARadius = valueA;
+								updateRadii();
 								query();
 							});
 							$('.ui-widget-header').css('background','#BEBEC0');
@@ -93,18 +95,19 @@
 						</div>
 
 						<script type="text/javascript">
-						var sliderBRadius = 5;						
+						var sliderBRadius = 2.5;						
 						$(document).ready(function() {
-							var sliderBMax = 10;
+							var sliderBMax = 5;
 							$("#sliderB").slider({
 								range: "min",
-								value: 5,
+								value: 2.5,
 								step:0.01,
 								min: 0.01,
 								max: sliderBMax,
 								slide: function(event, ui) {
 									$("#sliderB-radius").val(ui.value);
 									sliderBRadius = ui.value;
+									updateRadii();
 									query();
 								}
 							});
@@ -121,6 +124,7 @@
 								}
 								$("#sliderB").slider("value", parseInt(valueB));
 								sliderBRadius = valueB;
+								updateRadii();
 								query();
 							});
 							$('.ui-widget-header').css('background','#BEBEC0');
