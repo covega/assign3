@@ -302,7 +302,7 @@
 					<div id="filter">
 						<h3>Time of Day</h3>
 						<p id="todRange">
-							From <input type="text" class="time start" placeholder="12:00am"/> to <input type="text" class="time end" placeholder="12:00am"/>
+							From <input type="text" class="time start" id="time" placeholder="12:00am"/> to <input type="text" class="time end" id="time" placeholder="12:00am"/>
 						</p>
 
 						<script>
@@ -326,7 +326,23 @@
 					<div id="spacer"></div>
 
 					<div id="button">
-						<button type="reset" class="reset" value="Reset">Reset</button>
+						<button type="reset" id="reset" class="reset" value="Reset">Reset</button>
+						<script>
+							document.getElementById("reset").onclick = function() {resetFn()};
+							function resetFn() {
+								$("#sliderA").slider({value: 2.5});
+								$("#sliderB").slider({value: 2.5});
+								$("#sliderA-radius").val(2.5);
+								$("#sliderB-radius").val(2.5);
+								$("#category").multipleSelect('checkAll');
+								$("#resolution").multipleSelect('checkAll');
+								$("#dow").multipleSelect('checkAll');
+								var d = new Date();
+								d.setHours(0, 0, 0, 0);
+								$('#todRange .time').timepicker('setTime',d);
+								reset();
+							}
+						</script>
 					</div>
 
 				</div>

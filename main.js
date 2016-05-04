@@ -358,9 +358,41 @@ function query(){
 	filterFromPoint(projection.invert([dragDataB[0].x, dragDataB[0].y]), sliderBRadius);
 	filterByTime(startTime, endTime);	
 	filterByDays(days);
-	filterByCategories(types)
-	filterByResolutions(groups)
+	filterByCategories(types);
+	filterByResolutions(groups);
 	update();
+}
+
+function reset() {
+	sliderARadius = 2.5;
+	sliderBRadius = 2.5;
+	updateRadii();
+	startTime = dateFormat("12:00am")
+	endTime = dateFormat("12:00am")
+	days = {
+				Monday:true,
+				Tuesday:true,
+				Wednesday:true,
+				Thursday:true,
+				Friday:true,
+				Saturday:true,
+				Sunday:true,
+			};
+	groups= {
+				"Arrest":true,
+				"Juvenile Related":true,
+				"None":true,
+				"Not Prosecuted/Unfounded":true,
+				"Other":true,
+			};
+	types = {
+				"Personal/Violent":true,
+				"Property":true,
+				"White-Collar/Financial":true,
+				"Victimless":true,
+				"Other (Non-Criminal/Non-Violent)":true,
+			};
+	query();
 }
 
 
