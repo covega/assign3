@@ -9,14 +9,6 @@ body {
     color: #212126;
 }
 
-a { 
-	color:#3288c4 
-}
-
-a:hover { 
-	color:#12588F 
-}
-
 h2 {
 	font-size:1.6em; 
 	font-family: 'ArcoPerpetuoBold';
@@ -37,9 +29,9 @@ h3 {
 }
 
 #page-wrap {
-	background: white;
+	background: #fff;
 	min-width: 780px;
-	max-width: 1260px;
+	max-width: 100%;
 	margin: 0;
 	/*margin: 10px auto;*/
 }
@@ -55,9 +47,9 @@ h3 {
 
 #main-content {
 	padding-left: 400px;
-	height: 750px;
 	min-width: 750px;
 	max-width: 100%-400px;
+	/*height: 750px;*/
 }
 
 #left-sidebar-inner {
@@ -68,9 +60,9 @@ h3 {
 }
 
 #left-sidebar {
+	float: left;
 	width: 400px;
 	height: 750px;
-	float: left;
 	background: #eeeeee;
 }
 
@@ -178,7 +170,7 @@ button.reset {
     position: absolute;			
     text-align: center;
     width: 200px;					
-    height: 65px;					
+    /*height: 65px;*/
     padding: 2px;				
     font-size: 0.9em;
     color: #212126;
