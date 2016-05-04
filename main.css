@@ -15,7 +15,8 @@ h2 {
 	font-weight: bold; 
 	letter-spacing: 1px;
 	color: #3E3E40;
-	margin-bottom: 3px;
+	margin-top:10px;
+	/*margin-bottom: 3px;*/
 	text-align: center;
 }
 
@@ -47,6 +48,14 @@ h3 {
 	text-align: center
 }
 
+#logo {
+	background: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #adadad;
+	text-align: center;
+}
+
 #main-content {
 	display: table-cell;
 	width: 100%;
@@ -68,6 +77,7 @@ h3 {
 	width: 400px;
 	vertical-align: top;
 	background: #eeeeee;
+	border-right: 2px solid #adadad;
 	/*float: left;
 	height: 750px;*/
 }
