@@ -392,6 +392,26 @@ function reset() {
 				"Victimless":true,
 				"Other (Non-Criminal/Non-Violent)":true,
 			};
+    dragDataA = [{x: 200, y:400}];
+    dragDataRadiusA = [{x: 200, y:400}];
+    dragDataB = [{x:400, y:400}];
+    dragDataRadiusB = [{x:400, y:400}];	
+    d3.select(".point.A").select("circle")
+    	.data(dragDataA)		
+    	.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })
+    d3.select(".point.B").select("circle")
+    	.data(dragDataB)		
+    	.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })		
+    d3.select(".outline.A").select("circle")
+    	.data(dragDataRadiusA)		
+    	.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })
+	d3.select(".outline.B").select("circle")
+    	.data(dragDataRadiusB)		
+    	.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; })
 	query();
 }
 
