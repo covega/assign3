@@ -14,7 +14,7 @@ h2 {
 	font-family: 'ArcoPerpetuoBold';
 	font-weight: bold; 
 	letter-spacing: 1px;
-	color: #0a5791; 
+	color: #3E3E40;
 	margin-bottom: 3px;
 	text-align: center;
 }
@@ -30,9 +30,11 @@ h3 {
 
 #page-wrap {
 	background: #fff;
-	min-width: 780px;
-	max-width: 100%;
+	display: table;
+	width: 100%;
 	margin: 0;
+	/*min-width: 780px;
+	max-width: 100%;
 	/*margin: 10px auto;*/
 }
 
@@ -46,24 +48,28 @@ h3 {
 }
 
 #main-content {
-	padding-left: 400px;
+	display: table-cell;
+	width: 100%;
 	min-width: 750px;
-	max-width: 100%-400px;
+	/*padding-left: 400px;
+	min-width: 750px;
+	max-width: 100%;*/
 	/*height: 750px;*/
 }
 
 #left-sidebar-inner {
 	width: 360px;
-	float: center;
 	margin-left: 20px;
 	margin-right: 20px;
 }
 
 #left-sidebar {
-	float: left;
+	display: table-cell;
 	width: 400px;
-	height: 750px;
+	vertical-align: top;
 	background: #eeeeee;
+	/*float: left;
+	height: 750px;*/
 }
 
 #filter {
@@ -137,17 +143,15 @@ button.reset {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	padding: 3px;
-	border: 1px solid #0a5791;
-	background-color: #0a5791;
-	width: 160px;
-	height:40px;
+	padding: 5px;
+	border: 1px solid #636366;
+	background-color: #d4d4d4;
+	width: 360px;
 	text-align: center;
 	font-family: 'ArcoPerpetuoRegular';
-	font-weight: bold; 
-	font-size: 1.3em;
+	font-size: 1.2em;
 	letter-spacing: 2px;
-	color: #fff;
+	color: #3E3E40;
 }
 
 #spacer {
