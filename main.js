@@ -53,19 +53,37 @@ var currScale = 1;
 var g = svg.append('g');
 var marks;
 
+// var zoom = d3.behavior.zoom()
+// 	.scaleExtent([1, 10])
+// 	.on("zoom", function() {
+// 		currScale = d3.event.scale;
+// 		g.attr("transform", "translate("+
+// 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+// 		sfsvg.attr("transform", "translate("+
+// 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+// 		points.attr("transform", "translate("+
+// 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+// 		outlines.attr("transform", "translate("+
+// 			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+// 	});
+
 var zoom = d3.behavior.zoom()
 	.scaleExtent([1, 10])
-	.on("zoom", function() {
-		currScale = d3.event.scale;
-		g.attr("transform", "translate("+
-			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-		sfsvg.attr("transform", "translate("+
-			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-		points.attr("transform", "translate("+
-			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-		outlines.attr("transform", "translate("+
-			d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-	});
+	.on("zoom", zoomer)
+
+// LIMITS PANNING
+function zoomer() {
+  var t = d3.event.translate,
+      s = d3.event.scale;
+  t[0] = Math.min(0, Math.max(-width*s + width, t[0]));
+  t[1] = Math.min(0, Math.max(-height*s + height, t[1]));
+  zoom.translate(t);
+  g.style("stroke-width", 1 / s).attr("transform", "translate(" + t + ")scale(" + s + ")");
+  sfsvg.style("stroke-width", 1 / s).attr("transform", "translate(" + t + ")scale(" + s + ")");
+  points.style("stroke-width", 1 / s).attr("transform", "translate(" + t + ")scale(" + s + ")");
+  outlines.style("stroke-width", 1 / s).attr("transform", "translate(" + t + ")scale(" + s + ")");
+}
+
 
 var dragDataA = [{x: 200, y:400}];
 var dragDataRadiusA = [{x: 200, y:400}];

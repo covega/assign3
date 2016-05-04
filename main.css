@@ -2,19 +2,11 @@
 
 body {
 	margin: 0;
-    font-family: 'ArcoPerpetuoRegular'; 
-   	font-weight: normal; 
-   	font-style: normal; 
-    font-size: 0.95em;
-    color: #212126;
-}
-
-a { 
-	color:#3288c4 
-}
-
-a:hover { 
-	color:#12588F 
+	font-family: 'ArcoPerpetuoRegular'; 
+	font-weight: normal; 
+	font-style: normal; 
+	font-size: 0.95em;
+	color: #212126;
 }
 
 h2 {
@@ -37,9 +29,9 @@ h3 {
 }
 
 #page-wrap {
-	background: white;
+	background: #fff;
 	min-width: 780px;
-	max-width: 1260px;
+	max-width: 100%;
 	margin: 0;
 	/*margin: 10px auto;*/
 }
@@ -55,9 +47,9 @@ h3 {
 
 #main-content {
 	padding-left: 400px;
-	height: 750px;
 	min-width: 750px;
 	max-width: 100%-400px;
+	/*height: 750px;*/
 }
 
 #left-sidebar-inner {
@@ -68,9 +60,9 @@ h3 {
 }
 
 #left-sidebar {
+	float: left;
 	width: 400px;
 	height: 750px;
-	float: left;
 	background: #eeeeee;
 }
 
@@ -93,8 +85,8 @@ h3 {
 	width: 30px; 
 	text-align: center;
 	font-size: 0.9em;
-    height: 13px;
-    color: #212126;
+	height: 13px;
+	color: #212126;
 }
 
 select {
@@ -107,22 +99,22 @@ select {
 }
 
 input.time {
-    width: 100px;
-    height: 20px;
-    font-size: 0.95em;
-    color: #212126;
+	width: 100px;
+	height: 20px;
+	font-size: 0.95em;
+	color: #212126;
 }
 
 input {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 3px;
-    border: 1px solid #aaa;
-    font-family: 'ArcoPerpetuoRegular';
-    color: #212126;
-    font-size: 0.9em;
-    vertical-align: middle;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 3px;
+	border: 1px solid #aaa;
+	font-family: 'ArcoPerpetuoRegular';
+	color: #212126;
+	font-size: 0.9em;
+	vertical-align: middle;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -132,10 +124,10 @@ input {
 	color: #212126;
 }
 :-ms-input-placeholder { /* IE 10+ */
-  	color: #212126;
+	color: #212126;
 }
 :-moz-placeholder { /* Firefox 18- */
-  	color: #212126;
+	color: #212126;
 }
 
 button.reset {
@@ -143,10 +135,10 @@ button.reset {
 	position: relative;
 	margin:0 auto;
 	-webkit-border-radius: 3px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 3px;
-    border: 1px solid #0a5791;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 3px;
+	border: 1px solid #0a5791;
 	background-color: #0a5791;
 	width: 160px;
 	height:40px;
@@ -162,33 +154,56 @@ button.reset {
 	height: 20px;
 }
 
+#radius-label {
+	float: left;
+}
+
+.circle {
+	display: inline-block;
+	vertical-align: bottom;
+	width: 1.05em;
+	height: 1.05em;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+}
+
+#circleA {
+	background: #3399FF;
+}
+
+#circleB {
+	background: #FF6600;
+}
+
 .mark {
 	z-index: 1;
 }
 
-.point.A {
-	fill: #007fff;
+.point.A, .outline.A {
+	fill: #3399FF;
 }
 
-.point.B {
-	fill: #007fff;
+.point.B, .outline.B {
+	fill: #FF6600;
 }
 
 #info {
-    position: absolute;			
-    text-align: center;
-    width: 200px;					
-    height: 65px;					
-    padding: 2px;				
-    font-size: 0.9em;
-    color: #212126;
-    background: #B0C4DE;
-    opacity: 0.9;	
-    border: 0px;		
-    border-radius: 8px;			
-    pointer-events: none;	
+	position: absolute;			
+	text-align: center;
+	width: 200px;					
+	/*height: 65px;*/
+	padding: 2px;				
+	font-size: 0.9em;
+	color: #212126;
+	background: #B0C4DE;
+	opacity: 0.9;	
+	border: 0px;		
+	border-radius: 8px;			
+	pointer-events: none;	
 }
 
 .outline {
-	opacity: 0.3;
+	opacity: 0.35;
 }
+
