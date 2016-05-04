@@ -52,7 +52,6 @@ var queries;
 var pointOneLoc;
 var pointTwoLoc;
 var currScale = 1;
-var g = svg.append('g');
 var marks;
 
 // var zoom = d3.behavior.zoom()
@@ -89,9 +88,6 @@ function zoomer() {
 
 var milesToPixels =  d3.geo.distance([0, 0], [0, 1])*EARTH_RADIUS_MILES;
 
-//var milesToPixels = 
-
-console.log(milesToPixels);
 
 var dragDataA = [{x: 200, y:400}];
 var dragDataRadiusA = [{x: 200, y:400}];
@@ -147,6 +143,7 @@ function updateRadii(){
 				return sliderBRadius*milesToPixels + sliderBRadius*3.14	
 		})		
 }
+
 //outline of
 svg.append("g")
 		.attr("class", "outline A")
@@ -171,6 +168,10 @@ svg.append("g")
 		})
 		.attr("cx", function(d) {return dragDataRadiusB[0].x; })
 		.attr("cy", function(d) {return dragDataRadiusB[0].y; })
+		
+var g = svg.append('g');
+
+
 
 //draggables
 svg.append("g")
@@ -367,7 +368,6 @@ d3.json('scpd_incidents.json', function(error, scpd_incidents){
 	if(error) throw error;	
 	data = scpd_incidents.data;
 
-	console.log(data);
 	displayData = data.slice();
 	query();
 
